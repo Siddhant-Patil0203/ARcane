@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Loader from "../components/Loader";
 import { Button, Card, CardBody, Image } from "@nextui-org/react";
 import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
@@ -6,10 +6,10 @@ import { ethers } from "ethers";
 import { HeartIcon } from "../components/HeartIcon";
 import { Layout } from "../components/Layout";
 import axios from "../axios";
+import { Chip } from "@nextui-org/react";
 
 import Filter from "../components/Filter";
 import { ImCalendar, ImCross, ImLocation } from "react-icons/im";
-import { Link } from "@nextui-org/react";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -184,12 +184,18 @@ function Cards(propertyList, setLiked, liked, address) {
                   {propertyList?.fetchProp[14]?.location}
                 </p>
                 <p className="text-small text-foreground/80 mt-1">
-                  <ImCross className="inline-block mr-1" />
+                  <ImCross className="inline-block mr-1 mb-4" />
                   {propertyList?.fetchProp[14]?.size}
                 </p>
-                <h4 className="mt-4 font-semibold">
+                <Chip
+                  color={
+                    propertyList?.fetchProp[14]?.status == "Listed"
+                      ? "success"
+                      : "primary"
+                  }
+                >
                   Current Status :- {propertyList?.fetchProp[14]?.status}
-                </h4>
+                </Chip>
               </div>
               <Button
                 isIconOnly
@@ -206,8 +212,15 @@ function Cards(propertyList, setLiked, liked, address) {
             </div>
 
             <div className="flex flex-col gap-1 mt-3">
-              <Link>$ {propertyList?.fetchProp[14]?.price}.00 /-</Link>
+              <p>$ {propertyList?.fetchProp[14]?.price}.00 /-</p>
             </div>
+
+            <Button
+              radius="full"
+              className="bg-gradient-to-tr from-[#1E152D] to-[#7D5CB2] text-white shadow-lg w-full"
+            >
+              View Details
+            </Button>
           </div>
         </div>
       </CardBody>
