@@ -5,7 +5,7 @@ import { UploadDropzone } from "@bytescale/upload-widget-react";
 // https://www.bytescale.com/docs/upload-widget#configuration
 // -----
 const options = {
-  apiKey: "public_kW15bkgR8Hr82MCvEkL4dVUGDNC4", // This is your API key.
+  apiKey: "secret_kW15bkg3tQzmNBALef9V3NjPN8sn", // This is your API key.
   maxFileCount: 1,
   showFinishButton: true, // Note: You must use 'onUpdate' if you set 'showFinishButton: false' (default).
   styles: {
