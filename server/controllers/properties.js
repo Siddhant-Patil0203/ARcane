@@ -40,7 +40,7 @@ export const getPropertiesById = async (req,res) => {
     
         res.status(200).json({
             success:true,
-            message:"Fetched By Id",
+            message:"Fetched By user",
             fetchProp
         })
     } catch (error) {
