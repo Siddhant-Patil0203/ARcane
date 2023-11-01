@@ -147,7 +147,7 @@ export default function App() {
                 variant="shadow"
                 startContent={<MdDeleteOutline />}
               >
-                Delete Account        
+                Delete Account
               </Button>
             </DropdownItem>
           </DropdownMenu>
