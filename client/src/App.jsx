@@ -10,7 +10,7 @@ import Register from "./pages/Register";
 import CanvasIndex from "./pages/CanvasIndex";
 import Dashboard from "./pages/Dashboard";
 import DashboardUpdate from "./pages/DashboardUpdate.jsx";
-import Favourites from "./components/Favourites";
+import YourList from "./components/YourList.jsx";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route path="/details" element={<CanvasIndex />} />
           <Route path="/dashboard/seller" element={<Dashboard />} />
           <Route path="/dashboard/seller/update" element={<DashboardUpdate />} />
-          <Route path="/favourites" element={<Favourites />} />
+          <Route path="/user/favourites" element={<YourList />} />
 
         </Route>
        

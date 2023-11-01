@@ -39,12 +39,15 @@ export const addFav = async (req,res) => {
 export const getFavProperties = async (req,res) => {
     const user_Id = req.userId;
 
+    console.log(user_Id)
+
     try {
         const getWishlistedProperties = await favourites.find({userId:user_Id});
+        console.log(getWishlistedProperties)
         res.json({
             success:true,
             message:"Fetched Fav",
-            getWishlistedProperties
+            fetchProp: getWishlistedProperties
         })
     } catch (error) {
         res.json({
@@ -59,7 +62,7 @@ export const getFavProperties = async (req,res) => {
 export const remFav = async(req,res) =>{
     const id = req.params.id;
     try {
-        const deleteFav = await favourites.deleteOne({propertyId:id});
+        const deleteFav = await favourites.deleteOne({_id:id});
         
         res.json({
             success:true,
