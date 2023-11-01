@@ -11,6 +11,7 @@ import initializePassport from './middlewares/passportConfig.js';
 import dalleRoutes from "./routes/dalle.js";
 import profileRoutes from "./routes/profile.js";
 import propertiesRoutes from "./routes/properties.js";
+import favouritesRoutes from "./routes/favourites.js";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/auth", googleAuthRoutes)
 app.use("/api/v1/dalle", dalleRoutes);
 app.use("/profile", profileRoutes);
 app.use("/api/v1/properties", propertiesRoutes);
+app.use("/api/v1/fav",favouritesRoutes);
 
 const CONNECTION_URL = process.env.MONGO_URL;
 const PORT = process.env.PORT || 5000;

@@ -77,7 +77,11 @@ export const updateProperty = async (req,res) => {
 export const deleteProperty = async (req,res) => {
     try {
         const id = req.params.id;
+    //    const deleted = await properties.findById({_id:id});
+    //    if(!deleted) return res.json({success:true , message:"Given Id Does Not Exist"});
+       
         await properties.findByIdAndDelete({_id:id});
+       
         res.json({
             success:true,
             message:"Property deleted"
