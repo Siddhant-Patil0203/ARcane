@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <NextUIProvider>
           <ThirdwebProvider
             activeChain={PolygonZkevmTestnet}
-            clientId="cb95cb68db659411235a2056c42c9fdf"
+            clientId={import.meta.env.VITE_CLIENT_ID}
           >
             <App />
           </ThirdwebProvider>

@@ -9,6 +9,7 @@ import Loader from "../components/Loader";
 import axios from "../axios";
 
 import { useTheme } from "next-themes";
+
 import {
   Switch,
   Button,
@@ -62,9 +63,7 @@ const Home = () => {
   };
 
   const address = useAddress();
-  const { contract } = useContract(
-    "0x7F92b6D61f269f977558AC55F03Ea5C632095a01"
-  );
+  const { contract } = useContract(import.meta.env.VITE_CONTRACT_ADDRESS);
   const { data, laoading } = useContractRead(
     contract,
     "getTransactionByProductID",
@@ -178,7 +177,7 @@ const Home = () => {
             onChange={(value) => setArgs(value.target.value)}
           /> */}
             <Web3Button
-              contractAddress="0x7F92b6D61f269f977558AC55F03Ea5C632095a01"
+              contractAddress={import.meta.env.VITE_CONTRACT_ADDRESS}
               action={(contract) => {
                 contract.call("createTransaction", [
                   address,
