@@ -10,6 +10,9 @@ import { Switch, Input, Button } from "@nextui-org/react";
 import { MoonIcon } from "../components/MoonIcon";
 import { SunIcon } from "../components/SunIcon";
 import { ImGoogle } from "react-icons/im";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+import Navbar from "../components/Navbar"
 
 const initialForm = {
   name: "",
@@ -73,129 +76,183 @@ const Register = () => {
 
     window.location.href = "http://localhost:5000/auth/google";
   };
-    //Google Auth Redirect
-    const queryParams = new URLSearchParams(window.location.search);
-    const token = queryParams.get("token");
-    const userResult = queryParams.get("result");
-    // console.log(token, userResult);
-    if (token && userResult) {
-      useEffect(() => {
-        setIsLoading(true);
-        const userG = {};
-        userG.result = JSON.parse(userResult); // Parse the userResult JSON string into an object
-        userG.token = token;
-        localStorage.setItem("user", JSON.stringify(userG));
-        setUser(JSON.parse(localStorage.getItem("user")));
-        
-        setIsLoading(false);
-        navigateTo("/");
-      }, []);
-    }
+  //Google Auth Redirect
+  const queryParams = new URLSearchParams(window.location.search);
+  const token = queryParams.get("token");
+  const userResult = queryParams.get("result");
+  // console.log(token, userResult);
+  if (token && userResult) {
+    useEffect(() => {
+      setIsLoading(true);
+      const userG = {};
+      userG.result = JSON.parse(userResult); // Parse the userResult JSON string into an object
+      userG.token = token;
+      localStorage.setItem("user", JSON.stringify(userG));
+      setUser(JSON.parse(localStorage.getItem("user")));
+
+      setIsLoading(false);
+      navigateTo("/");
+    }, []);
+  }
 
   return (
     <>
-      {isLoading ? <Loader width="500px" height="250px" /> : null}
-      <div className="flex justify-between m-5 text-2xl text-center">
-        Register
-        <Switch
-          defaultSelected
-          size="lg"
-          color="primary"
-          thumbIcon={({ isSelected, className }) =>
-            !isSelected ? (
-              <SunIcon className={className} />
-            ) : (
-              <MoonIcon className={className} />
-            )
-          }
-          onClick={() => {
-            if (theme === "light") {
-              setTheme("dark");
-            } else if (theme === "dark") {
-              setTheme("light");
-            }
-          }}
-        />
+      <Navbar />
+      <div className="h-screen w-screen">
+        <div className="flex  flex-col justify-center px-6 py-12 lg:px-8">
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+              Sign in to your account
+            </h2>
+          </div>
+
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form className="space-y-6" action="#" method="POST">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium leading-6 text-white"
+                >
+                  Name
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="name"
+                    name="name"
+                    type="name"
+                    autoComplete="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    isInvalid={errors.name ? true : false}
+                    isRequired
+                    className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#399770] "
+                  />
+                  {errors.name && (
+                    <div className="m-2 text-red-500">{errors.name}</div>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-6 text-white"
+                >
+                  Email address
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    isInvalid={errors.email ? true : false}
+                    isRequired
+                    className="block w-full rounded-md border-0 p-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#399770] "
+                  />
+                  {errors.email && (
+                    <div className="m-2 text-red-500">{errors.email}</div>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Password
+                  </label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    value={form.password}
+                    onChange={handleChange}
+                    isInvalid={errors.password ? true : false}
+                    isRequired
+                    className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
+                  />
+                  {errors.password && (
+                    <div className="p-1 m-2 text-red-500">
+                      {errors.password}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="confirmPassword"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Confirm Password
+                  </label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    autoComplete="current-password"
+                    value={form.confirmPassword}
+                    onChange={handleChange}
+                    isInvalid={errors.confirmPassword ? true : false}
+                    isRequired
+                    className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
+                  />
+                  {errors.confirmPassword && (
+                    <div className="p-1 m-2 text-red-500">
+                      {errors.confirmPassword}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-[#25C07F] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#399770] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                  // onClick={signup}
+                >
+                  Sign Up
+                </button>
+                {serverMsg && (
+                  <div className="p-1 m-2 text-red-500">{serverMsg}</div>
+                )}
+              </div>
+            </form>
+            <Button
+              onClick={googleSignin}
+              className="flex mt-3 w-full"
+              color="primary"
+              radius="sm"
+              isLoading={isLoading}
+              startContent={<ImGoogle />}
+            >
+              Sign in with Google
+            </Button>
+            <div className="mt-5 flex ">
+              Already Registered ? {"  "}
+              <Link to="/login" className="text-primary">
+                <center>&nbsp; Login</center>
+              </Link>
+            </div>
+          </div>
+        </div>{" "}
+        <div>
+          <Toaster />
+        </div>
       </div>
-      <form onSubmit={handleSumbmit}>
-        <Input
-          type="name"
-          label="Name"
-          name="name"
-          id="name"
-          value={form.name}
-          onChange={handleChange}
-          isInvalid={errors.name ? true : false}
-          isRequired
-          className="m-2 w-[300px]"
-        />
-        {errors.name && <div className="m-2 text-red-500">{errors.name}</div>}
-        <Input
-          type="email"
-          label="Email"
-          name="email"
-          id="email"
-          value={form.email}
-          onChange={handleChange}
-          isInvalid={errors.email ? true : false}
-          isRequired
-          className="m-2 w-[300px]"
-        />
-        {errors.email && <div className="m-2 text-red-500">{errors.email}</div>}
-        <Input
-          type="password"
-          label="Password"
-          name="password"
-          id="password"
-          value={form.password}
-          onChange={handleChange}
-          isInvalid={errors.password ? true : false}
-          isRequired
-          className="m-2 w-[300px]"
-        />
-        {errors.password && (
-          <div className="p-1 m-2 text-red-500">{errors.password}</div>
-        )}
-        <Input
-          type="password"
-          label="Confirm Password"
-          name="confirmPassword"
-          id="confirmPassword"
-          value={form.confirmPassword}
-          onChange={handleChange}
-          isInvalid={errors.confirmPassword ? true : false}
-          isRequired
-          className="m-2 w-[300px]"
-        />
-        {errors.confirmPassword && (
-          <div className="p-1 m-2 text-red-500">{errors.confirmPassword}</div>
-        )}
-        <Button
-          type="submit"
-          className="flex m-2 "
-          color="primary"
-          variant="shadow"
-          isLoading={isLoading}
-        >
-          Sign up
-        </Button>
 
-        {serverMsg && <div className="p-1 m-2 text-red-500">{serverMsg}</div>}
-      </form>
-
-      <Button
-        onClick={googleSignin}
-        className="flex m-2"
-        color="primary"
-        variant="shadow"
-        isLoading={isLoading}
-        startContent={<ImGoogle />}
-      >
-        Sign in with Google
-      </Button>
-      <Link to="/login" className="p-2 m-2 text-primary">
-        Login ?
-      </Link>
+      {isLoading ? <Loader width="500px" height="250px" /> : null}
+      
     </>
   );
 };
