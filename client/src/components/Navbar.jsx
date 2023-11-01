@@ -51,9 +51,9 @@ export default function App() {
   };
   return (
     <Navbar isBordered className="">
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarBrand className="mr-4">
-          <p className="hidden sm:block font-bold text-inherit">ARcane</p>
+          <p className="hidden font-bold sm:block text-inherit">ARcane</p>
         </NavbarBrand>
         <NavbarItem>
           <Link color="foreground" href="#">
@@ -89,11 +89,11 @@ export default function App() {
             variant="shadow"
             startContent={<MdDeleteOutline />}
           >
-            Delete Account        
+            Delete Account 
           </Button>
         </NavbarItem>
         <NavbarItem>
-          <User
+          {/* <User
             name={user.result.name}
             description={user.result.email}
             avatarProps={{
@@ -101,7 +101,7 @@ export default function App() {
                 (user && user.result.picture) ||
                 "https://img.icons8.com/?size=256&id=kDoeg22e5jUY&format=png",
             }}
-          />
+          /> */}
         </NavbarItem>
       </NavbarContent>
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loader from "../components/Loader";
 import { Button, Card, CardBody, Image } from "@nextui-org/react";
 import {
@@ -10,10 +10,54 @@ import {
 import { ethers } from "ethers";
 import { HeartIcon } from "../components/HeartIcon";
 import { Layout } from "../components/Layout";
+import axios from "../axios";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [liked, setLiked] = useState(false);
+  const [propertyList, setPropertyList] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      try {
+        const res = await axios.get("/api/v1/properties/fetch");
+        setPropertyList(res.data);
+        setIsLoading(false);
+      } catch (err) {
+        console.error(err);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+    console.log("UseEffect :" + propertyList);
+  }, [setIsLoading]);
+
+  const addToFav = async (index) => {
+    // setIsLoading(true);
+
+    try {
+      await axios.post(`/api/v1/fav/addFav/:${propertyList?.fetchProp[index]?._id}`)
+      // setIsLoading(false);
+    } catch (err) {
+      console.error(err);
+      // setIsLoading(false);
+    }
+  };
+  
+  const removeFromFav = async (index) => {
+    // setIsLoading(true);
+
+    try {
+      await axios.post(`/api/v1/fav/remFav/:${propertyList?.fetchProp[index]?._id}`)
+      // setIsLoading(false);
+    } catch (err) {
+      console.error(err);
+      // setIsLoading(false);
+    }
+  };
 
   const address = useAddress();
   const { contract } = useContract(import.meta.env.VITE_CONTRACT_ADDRESS);
@@ -44,7 +88,8 @@ const Home = () => {
                 className="object-cover"
                 height={200}
                 shadow="md"
-                src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                // src=""
+                src={propertyList?.fetchProp[14]?.image}
                 width="100%"
               />
             </div>
@@ -53,7 +98,8 @@ const Home = () => {
               <div className="flex items-start justify-between">
                 <div className="flex flex-col gap-0">
                   <h3 className="font-semibold text-foreground/90">
-                    Daily Mix
+                    {console.log(propertyList)}
+                    {propertyList?.fetchProp[14]?.title}
                   </h3>
                   <p className="text-small text-foreground/80">12 Tracks</p>
                   <h1 className="mt-2 font-medium text-large">

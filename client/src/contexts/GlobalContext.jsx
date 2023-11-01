@@ -11,8 +11,6 @@ export const GlobalProvider = (props) => {
       value={{
         user,
         setUser,
-        propertyList,
-        setPropertyList,
       }}
     >
       {props.children}
