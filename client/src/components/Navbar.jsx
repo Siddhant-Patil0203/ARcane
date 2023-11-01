@@ -2,6 +2,7 @@ import React from "react";
 import { useTheme } from "next-themes";
 
 
+
 import {
   Navbar,
   Switch,
@@ -133,7 +134,7 @@ export default function NavBar() {
       });
   }, []);
   return (
-    <Navbar isBordered className="">
+    <Navbar isBordered className=" sticky top-[0vh]">
       <NavbarBrand className="mr-4 space-x-3">
         <img src={Logo} className=" w-9 " />
         <p className="hidden sm:block font-bold text-inherit ">ARcane</p>

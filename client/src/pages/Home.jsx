@@ -151,6 +151,7 @@ const Home = () => {
 
   return (
     <Layout>
+         <BottomHome />
       {isLoading ? <Loader width="500px" height="250px" /> : null}
       <Filter>
         {propertyList?.fetchProp?.map((item, index) => {

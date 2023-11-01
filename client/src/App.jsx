@@ -21,14 +21,15 @@ function App() {
           <Route path="/test" element={<Test />} />
           <Route path="/details" element={<CanvasIndex />} />
           <Route path="/dashboard/seller" element={<Dashboard />} />
-          <Route path="/dashboard/seller/update" element={<DashboardUpdate />} />
+          <Route
+            path="/dashboard/seller/update"
+            element={<DashboardUpdate />}
+          />
           <Route path="/favourites" element={<Favourites />} />
-
         </Route>
-       
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
       </Routes>
     </NextThemesProvider>
   );
