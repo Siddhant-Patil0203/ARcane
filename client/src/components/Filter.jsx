@@ -358,9 +358,7 @@ export default function Filter({ children }) {
               {/* Product grid */}
               <div className="lg:col-span-3">
                 {/* Replace with your content */}
-                <div className="h-96 rounded-lg border-4 border-dashed lg:h-full">
-                  {children}
-                </div>
+                {children}
                 {/* /End replace */}
               </div>
             </div>

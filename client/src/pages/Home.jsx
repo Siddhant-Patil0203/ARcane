@@ -90,34 +90,40 @@ const Home = () => {
       try {
         const res = await axios.get("/api/v1/properties/fetch");
         setPropertyList(res.data);
-        setIsLoading(false);
+        // setIsLoading(false);
       } catch (err) {
         console.error(err);
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     };
 
-    fetchData();
+    fetchData().then((res) => {
+      setIsLoading(false);
+    });
     console.log("UseEffect :" + propertyList);
-  }, [setIsLoading]);
+  }, []);
 
   const addToFav = async (index) => {
     // setIsLoading(true);
 
     try {
-      await axios.post(`/api/v1/fav/addFav/:${propertyList?.fetchProp[index]?._id}`)
+      await axios.post(
+        `/api/v1/fav/addFav/:${propertyList?.fetchProp[index]?._id}`
+      );
       // setIsLoading(false);
     } catch (err) {
       console.error(err);
       // setIsLoading(false);
     }
   };
-  
+
   const removeFromFav = async (index) => {
     // setIsLoading(true);
 
     try {
-      await axios.post(`/api/v1/fav/remFav/:${propertyList?.fetchProp[index]?._id}`)
+      await axios.post(
+        `/api/v1/fav/remFav/:${propertyList?.fetchProp[index]?._id}`
+      );
       // setIsLoading(false);
     } catch (err) {
       console.error(err);
@@ -145,7 +151,7 @@ const Home = () => {
       <Filter>
         <Card
           isBlurred
-          className="border-none bg-background/60 dark:bg-default-100/50 w-[90%] "
+          className="border-none bg-background/60 dark:bg-default-100/50 w-[100%] "
           shadow="sm"
         >
           <CardBody>
@@ -157,7 +163,7 @@ const Home = () => {
                   height={200}
                   shadow="md"
                   // src=""
-                src={propertyList?.fetchProp[14]?.image}
+                  src={propertyList?.fetchProp[14]?.image}
                   width="100%"
                 />
               </div>
@@ -167,7 +173,7 @@ const Home = () => {
                   <div className="flex flex-col gap-0">
                     <h3 className="font-semibold text-foreground/90">
                       {console.log(propertyList)}
-                    {propertyList?.fetchProp[14]?.title}
+                      {propertyList?.fetchProp[14]?.title}
                     </h3>
                     <p className="text-small text-foreground/80">12 Tracks</p>
                     <h1 className="mt-2 font-medium text-large">
