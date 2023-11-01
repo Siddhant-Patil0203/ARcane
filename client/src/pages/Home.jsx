@@ -112,6 +112,7 @@ const Home = () => {
                   radius="full"
                   variant="light"
                   onPress={() => setLiked((v) => !v)}
+                  onClick={addToFav(14)}
                 >
                   <HeartIcon
                     className={liked ? "[&>path]:stroke-transparent" : ""}
