@@ -21,7 +21,7 @@ app.use(cors());
 initializePassport(app)
 
 app.get("/", (req, res) => {
-  res.send("Sidd0203 Server");
+  res.send("ARcane Server");
 });
 
 app.use("/user", userRoutes);
