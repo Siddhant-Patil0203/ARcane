@@ -32,25 +32,6 @@ export const getPropertiesByStatus = async (req,res) => {
     }
 }
 
-//  /api/v1/properties/fetch/user (protected) 
-export const getPropertiesById = async (req,res) => {
-    const userId =  req.userId;
-    try {
-        const fetchProp = await properties.find({user : userId});
-    
-        res.status(200).json({
-            success:true,
-            message:"Fetched By Id",
-            fetchProp
-        })
-    } catch (error) {
-        res.status(404).json({
-            success:true,
-            Message:"Unable to get properties"
-        })
-    }
-}
-
 // route /api/v1/properties/Add (PROTECTED)
 export const addProperty = async (req,res) => {
     const {title , image , description, price ,location, size, status, blockchainId} = req.body;

@@ -1,23 +1,21 @@
 import mongoose from "mongoose";
 
 // yet to add required
-const reviewsSchema = new mongoose.Schema({
-    propertyId : {  // who params
+const reviewsSchema = new mongoose({
+    propertyId : {
         type:String
     },
-    userName:{
-        type:String
-    },
-    userId:{    // middleware
+    userId:{
         type:String,
     },
-    comment:{ 
-        type:String,
+    reviews:{
+        type:[String],
     },
     likes:{
-        type:Number,
-        default:0
+        type:Number
     }
-});
+})
 
-export default mongoose.model("reviews",reviewsSchema);
+const Reviews = mongoose.model("Properties",reviewsSchema);
+
+export default Reviews;
