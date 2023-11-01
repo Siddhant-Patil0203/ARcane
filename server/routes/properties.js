@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/fetch",getProperties);
 router.get("/fetch/:status",getPropertiesByStatus);
 router.post("/Add", authUser ,addProperty);
-router.put("/update/:id", updateProperty);
-router.delete("/delete/:id",deleteProperty);
+router.put("/update/:id", authUser , updateProperty);
+router.delete("/delete/:id", authUser , deleteProperty);
 
 export default router;
