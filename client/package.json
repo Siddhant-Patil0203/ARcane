@@ -1,7 +1,7 @@
 {
   "name": "client",
   "private": true,
-  "proxy": "add your deployed link here",
+  "proxy": "https://arcane-server.vercel.app",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

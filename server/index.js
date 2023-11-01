@@ -10,6 +10,7 @@ import googleAuthRoutes from "./routes/googleAuth.js"
 import initializePassport from './middlewares/passportConfig.js';
 import dalleRoutes from "./routes/dalle.js";
 import profileRoutes from "./routes/profile.js";
+import propertiesRoutes from "./routes/properties.js";
 
 const app = express();
 
@@ -20,13 +21,14 @@ app.use(cors());
 initializePassport(app)
 
 app.get("/", (req, res) => {
-  res.send("Sidd0203 Server");
+  res.send("ARcane Server");
 });
 
 app.use("/user", userRoutes);
 app.use("/auth", googleAuthRoutes)
 app.use("/api/v1/dalle", dalleRoutes);
 app.use("/profile", profileRoutes);
+app.use("/api/v1/properties", propertiesRoutes);
 
 const CONNECTION_URL = process.env.MONGO_URL;
 const PORT = process.env.PORT || 5000;
