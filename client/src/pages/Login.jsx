@@ -71,7 +71,7 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    window.location.href = "https://arcane-server.vercel.app/auth/google";
+    window.location.href = "http://localhost:5000/auth/google";
   };
   //Google Auth Redirect
   const queryParams = new URLSearchParams(window.location.search);

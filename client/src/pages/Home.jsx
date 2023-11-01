@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Loader from "../components/Loader";
-import { Button, Card, CardBody, Image } from "@nextui-org/react";
-import Navbar from "../components/Navbar";
+import { Button, Card, CardBody, Image, Input } from "@nextui-org/react";
 import {
   Web3Button,
   useAddress,
@@ -10,6 +9,9 @@ import {
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import { HeartIcon } from "../components/HeartIcon";
+import { Layout } from "../components/Layout";
+import { SearchIcon } from "../components/SearchIcon";
+import BottomHome from "../components/BottomHome"
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,8 +31,7 @@ const Home = () => {
   }
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       {isLoading ? <Loader width="500px" height="250px" /> : null}
       <Card
         isBlurred
@@ -97,7 +98,9 @@ const Home = () => {
           </div>
         </CardBody>
       </Card>
-    </>
+      <BottomHome/>
+    </Layout>
+    
   );
 };
 
