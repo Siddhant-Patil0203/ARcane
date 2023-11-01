@@ -33,7 +33,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
   }, []);
 
   const logout = () => {
@@ -108,7 +108,7 @@ export default function App() {
         </NavbarItem>
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
-            <NavbarItem>
+            {/* <NavbarItem>
               <User
                 name={user.result.name}
                 description={user.result.email}
@@ -118,12 +118,12 @@ export default function App() {
                     "https://img.icons8.com/?size=256&id=kDoeg22e5jUY&format=png",
                 }}
               />
-            </NavbarItem>
+            </NavbarItem> */}
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">{user.result.email}</p>
+              {/* <p className="font-semibold">{user.result.email}</p> */}
             </DropdownItem>
             <DropdownItem key="settings">My Settings</DropdownItem>
             <DropdownItem key="configurations">Configurations</DropdownItem>
