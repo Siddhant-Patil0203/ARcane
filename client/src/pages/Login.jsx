@@ -120,7 +120,7 @@ const Login = () => {
                   Email address
                 </label>
                 <div className="mt-2">
-                  <input
+                  <Input
                     id="email"
                     name="email"
                     type="email"
@@ -128,7 +128,6 @@ const Login = () => {
                     value={form.email}
                     onChange={handleChange}
                     isInvalid={errors.email ? true : false}
-                    isRequired
                     className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#399770] "
                     //   onChange={(e) => setUser({ ...user, email: e.target.value })}
                   />
@@ -147,7 +146,7 @@ const Login = () => {
                   </label>
                 </div>
                 <div className="mt-2">
-                  <input
+                  <Input
                     id="password"
                     name="password"
                     type="password"
@@ -155,7 +154,6 @@ const Login = () => {
                     value={form.password}
                     onChange={handleChange}
                     isInvalid={errors.password ? true : false}
-                    isRequired
                     className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
                     //   onChange={(e) =>
                     //     setUser({ ...user, password: e.target.value })
@@ -200,6 +198,7 @@ const Login = () => {
               </Link>
             </div>
           </div>
+
         </div>{" "}
         <div>
           <Toaster />

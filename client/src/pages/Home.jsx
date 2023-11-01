@@ -13,6 +13,8 @@ import { Layout } from "../components/Layout";
 import axios from "../axios";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import BottomHome from "../components/BottomHome";
+import Favourites from "../components/Favourites";
 import {
   ChevronDownIcon,
   FunnelIcon,
@@ -157,8 +159,9 @@ const Home = () => {
           );
         })}
       </Filter>
+      <Favourites />
+      <BottomHome />
     </Layout>
-    
   );
 };
 
