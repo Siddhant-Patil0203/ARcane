@@ -21,7 +21,6 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import Filter from "../components/Filter";
-import BottomHome from "../components/BottomHome";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -149,7 +148,6 @@ const Home = () => {
   return (
     <Layout>
       {isLoading ? <Loader width="500px" height="250px" /> : null}
-      <BottomHome />
       <Filter>
         {[1, 2, 3, 4].map((item, index) => {
           return (
