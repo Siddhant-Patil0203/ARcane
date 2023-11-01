@@ -35,11 +35,26 @@ import { ethers } from "ethers";
 const Home = () => {
   const { theme, setTheme } = useTheme();
   const navigateTo = useNavigate();
-  const { user, setUser } = useGlobalContext();
+  const { user, setUser, propertyList, setPropertyList } = useGlobalContext();
   const [isLoading, setIsLoading] = useState(false);
 
+  const getPropertyList = async () => {
+    setIsLoading(true);
+
+    try {
+      const res = await axios.get("/api/v1/properties/fetch");
+      setPropertyList(res.data);
+      setIsLoading(false);
+    } catch (err) {
+      console.error(err);
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    console.log(user);
+    getPropertyList();
+    console.log("useEffect is running");
+    console.log(propertyList);
   }, []);
 
   const logout = () => {
@@ -129,37 +144,43 @@ const Home = () => {
           </Button>
         </div>
       </div>
-      <Card
-        isFooterBlurred
-        className="w-[300px] h-[300px] col-span-12 sm:col-span-5"
-      >
-        <CardHeader className="absolute z-10 flex-col items-start top-1">
-          <p className="font-bold uppercase text-tiny text-black/60">2BHK</p>
-          <h4 className="text-2xl font-medium text-gray">Nagpur</h4>
-        </CardHeader>
-
-        <Image
-          removeWrapper
-          alt="Card example background"
-          className="z-0 object-cover w-full h-full scale-125 -translate-y-6"
-          src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        />
-        <CardFooter className="absolute bottom-0 z-10 justify-between bg-white/30 border-t-1 border-zinc-100/50">
-          <div>
-            <p className="text-black text-tiny">Available.</p>
-            <p className="text-black text-tiny">Get notified.</p>
-          </div>
-          <Button
-            onClick={() => navigateTo("/details")}
-            className="text-tiny"
-            color="primary"
-            radius="full"
-            size="sm"
+      {propertyList.fetchprop.map((item, index) => (
+        <div key={index}>
+          <Card
+            isFooterBlurred
+            className="w-[300px] h-[300px] col-span-12 sm:col-span-5"
           >
-            Visit Home
-          </Button>
-        </CardFooter>
-      </Card>
+            <CardHeader className="absolute z-10 flex-col items-start top-1">
+              <p className="font-bold uppercase text-tiny text-black/60">
+                {item[index].size}
+              </p>
+              <h4 className="text-2xl font-medium text-gray">{item[index].city}</h4>
+            </CardHeader>
+
+            <Image
+              removeWrapper
+              alt="Card example background"
+              className="z-0 object-cover w-full h-full scale-125 -translate-y-6"
+              src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            />
+            <CardFooter className="absolute bottom-0 z-10 justify-between bg-white/30 border-t-1 border-zinc-100/50">
+              <div>
+                <p className="text-black text-tiny">Available.</p>
+                <p className="text-black text-tiny">Get notified.</p>
+              </div>
+              <Button
+                onClick={() => navigateTo("/details")}
+                className="text-tiny"
+                color="primary"
+                radius="full"
+                size="sm"
+              >
+                Visit Home
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
+      ))}
       <main className="main">
         <div className="container">
           <div className="header">
