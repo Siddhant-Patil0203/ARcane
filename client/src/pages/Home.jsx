@@ -1,30 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Loader from "../components/Loader";
-import axios from "../axios";
-
-import { useTheme } from "next-themes";
-
-import {
-  Switch,
-  Button,
-  User,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Image,
-} from "@nextui-org/react";
+import { Button, Card, CardBody, Image } from "@nextui-org/react";
 import Navbar from "../components/Navbar";
-
 import {
-  ConnectWallet,
   Web3Button,
   useAddress,
   useContract,
   useContractRead,
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
-
 import { HeartIcon } from "../components/HeartIcon";
 
 const Home = () => {
