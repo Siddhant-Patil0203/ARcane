@@ -1,13 +1,14 @@
 import React from "react";
 import { useTheme } from "next-themes";
 
+
 import {
   Navbar,
   Switch,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
+
   Input,
   Button,
   DropdownItem,
@@ -26,6 +27,8 @@ import { MdDeleteOutline } from "react-icons/md";
 import axios from "../axios";
 import { User } from "@nextui-org/react";
 import Logo from "../assets/logo(Short).png";
+import { Link } from "react-router-dom";
+
 
 export default function NavBar() {
   const MapboxAPIKey =
@@ -36,9 +39,9 @@ export default function NavBar() {
   const [isLoading, setIsLoading] = useState(false);
   const { location, setLocation } = useTheme();
 
-  // useEffect(() => {
-  //   // console.log(user);
-  // }, []);
+  useEffect(() => {
+    // console.log(user);
+  }, []);
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -180,7 +183,7 @@ export default function NavBar() {
             }}
           />
         </NavbarItem>
-        {/* <Dropdown placement="bottom-end">
+        <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <NavbarItem>
               <User
@@ -199,8 +202,8 @@ export default function NavBar() {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{user.result.email}</p>
             </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
+            <DropdownItem key="settings">My Dashboard</DropdownItem>
+            <DropdownItem key="configurations"> <Link to="/favourites">Favourites</Link></DropdownItem>
             <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
             <DropdownItem key="logout" color="danger">
               <Button
@@ -212,6 +215,8 @@ export default function NavBar() {
               >
                 logout
               </Button>
+            </DropdownItem>
+            <DropdownItem>
               <Button
                 onClick={deleteUser}
                 className="flex mt-3"
@@ -219,11 +224,11 @@ export default function NavBar() {
                 variant="shadow"
                 startContent={<MdDeleteOutline />}
               >
-                Delete Account        
+               Delete Account
               </Button>
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown> */}
+        </Dropdown>
         <Input
           type="location"
           placeholder="Get Your Location"
@@ -237,6 +242,7 @@ export default function NavBar() {
             />
           }
         />
+              
       </NavbarContent>
     </Navbar>
   );

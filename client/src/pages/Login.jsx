@@ -71,7 +71,7 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    window.location.href = "http://localhost:5000/auth/google";
+    window.location.href = "http://locolhost:5000/auth/google";
   };
   //Google Auth Redirect
   const queryParams = new URLSearchParams(window.location.search);
@@ -94,13 +94,13 @@ const Login = () => {
 
   return (
     <>
-      <Navbar />
       {isLoading ? <Loader width="500px" height="250px" /> : null}
 
-      <div className="h-screen w-screen">
-        <div className="flex  flex-col justify-center    mx-5 lg:mx-0 px-6 py-5 lg:px-8">
+      <div className="w-screen h-screen">
+        <div className="flex flex-col justify-center px-6 py-5 mx-5 lg:mx-0 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
-            <h2 className=" mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+            <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-center text-white "></h2>
+            <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-center dark:text-white">
               Sign in to your account
             </h2>
           </div>
@@ -112,60 +112,31 @@ const Login = () => {
               method="POST"
               onSubmit={handleSumbmit}
             >
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-white"
-                >
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    isInvalid={errors.email ? true : false}
-                    className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#399770] "
-                    //   onChange={(e) => setUser({ ...user, email: e.target.value })}
-                  />
-                </div>
-              </div>
-              {errors.email && (
-                <div className="m-2 text-red-500">{errors.email}</div>
-              )}
-              <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-white"
-                  >
-                    Password
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <Input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    value={form.password}
-                    onChange={handleChange}
-                    isInvalid={errors.password ? true : false}
-                    className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
-                    //   onChange={(e) =>
-                    //     setUser({ ...user, password: e.target.value })
-                    //   }
-                  />
-                  {errors.password && (
-                    <div className="p-1 m-2 text-red-500">
-                      {errors.password}
-                    </div>
-                  )}
-                </div>
-              </div>
+              <Input
+                label="Email"
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                value={form.email}
+                onChange={handleChange}
+                isInvalid={errors.email ? true : false}
+                isRequired
+
+                //   onChange={(e) => setUser({ ...user, email: e.target.value })}
+              />
+
+              <Input
+                id="password"
+                label="Password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                value={form.password}
+                onChange={handleChange}
+                isInvalid={errors.password ? true : false}
+                isRequired
+              />
 
               <div>
                 <button
@@ -191,7 +162,7 @@ const Login = () => {
                 )}
               </div>
             </form>
-            <div className="mt-5 flex ">
+            <div className="flex mt-5 ">
               New User ? {"  "}
               <Link to="/register" className="text-primary">
                 <center>&nbsp; Signup</center>

@@ -4,7 +4,6 @@ const GlobalContext = createContext({});
 
 export const GlobalProvider = (props) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [propertyList, setPropertyList] = useState();
 
   return (
     <GlobalContext.Provider

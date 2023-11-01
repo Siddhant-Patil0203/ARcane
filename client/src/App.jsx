@@ -8,6 +8,9 @@ import Home from "./pages/Home";
 import Test from "./pages/Test";
 import Register from "./pages/Register";
 import CanvasIndex from "./pages/CanvasIndex";
+import Dashboard from "./pages/Dashboard";
+import DashboardUpdate from "./pages/DashboardUpdate.jsx";
+import Favourites from "./components/Favourites";
 
 function App() {
   return (
@@ -17,9 +20,15 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/test" element={<Test />} />
           <Route path="/details" element={<CanvasIndex />} />
+          <Route path="/dashboard/seller" element={<Dashboard />} />
+          <Route path="/dashboard/seller/update" element={<DashboardUpdate />} />
+          <Route path="/favourites" element={<Favourites />} />
+
         </Route>
+       
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
       </Routes>
     </NextThemesProvider>
   );

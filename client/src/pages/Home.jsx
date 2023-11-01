@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, use } from "react";
 import Loader from "../components/Loader";
 import { Button, Card, CardBody, Image, Input } from "@nextui-org/react";
 import {
@@ -14,7 +14,6 @@ import axios from "../axios";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import BottomHome from "../components/BottomHome";
-import Favourites from "../components/Favourites";
 import {
   ChevronDownIcon,
   FunnelIcon,
@@ -22,7 +21,10 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+import { Chip } from "@nextui-org/react";
+import { Link, useNavigate } from "react-router-dom";
 import Filter from "../components/Filter";
+import { ImCalendar, ImCross, ImLocation } from "react-icons/im";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -76,9 +78,9 @@ const filters = [
   },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(" ");
+// }
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -151,87 +153,91 @@ const Home = () => {
     <Layout>
       {isLoading ? <Loader width="500px" height="250px" /> : null}
       <Filter>
-        {[1, 2, 3, 4].map((item, index) => {
+        {propertyList?.fetchProp?.map((item, index) => {
           return (
-            <div key={index} className=" mx-2 mb-10">
-              {Cards(propertyList, setLiked, liked, address)}
+            <div key={index} className="mx-2 mb-10 ">
+              <Card
+                isBlurred
+                className="border-none bg-background/60 dark:bg-default-100/50 "
+                shadow="sm"
+              >
+                <CardBody>
+                  <div className="grid items-center justify-center grid-cols-6 gap-6 md:grid-cols-12 md:gap-4">
+                    <div className="relative col-span-6 md:col-span-4">
+                      <Image
+                        alt="Album cover"
+                        className="object-cover"
+                        height={200}
+                        shadow="md"
+                        // src=""
+                        src={item?.image}
+                        width="100%"
+                      />
+                    </div>
+
+                    <div className="flex flex-col col-span-6 md:col-span-8">
+                      <div className="flex items-start justify-between">
+                        <div className="flex flex-col gap-0">
+                          <h1 className="text-2xl font-medium text-foreground/90">
+                            {console.log(propertyList)}
+                            {item.title}
+                          </h1>
+                          <p className="mt-1 text-small text-foreground/80">
+                            <ImLocation className="inline-block mr-1" />
+                            {item?.location}
+                          </p>
+                          <p className="mt-1 text-small text-foreground/80">
+                            <ImCross className="inline-block mb-4 mr-1" />
+                            {item?.size}
+                          </p>
+                          <Chip
+                            color={
+                              item?.status == "Listed" ? "success" : "primary"
+                            }
+                          >
+                            Current Status :- {item?.status}
+                          </Chip>
+                        </div>
+                        <Button
+                          isIconOnly
+                          className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2"
+                          radius="full"
+                          variant="light"
+                          onPress={() => setLiked((v) => !v)}
+                        >
+                          <HeartIcon
+                            className={
+                              liked ? "[&>path]:stroke-transparent" : ""
+                            }
+                            fill={liked ? "currentColor" : "none"}
+                          />
+                        </Button>
+                      </div>
+
+                      <div className="flex flex-col gap-1 mt-3">
+                        <p>$ {item?.price}.00 /-</p>
+                      </div>
+
+                      <Link to="/details" state={{item}}>
+                        {/* <Button
+              radius="full"
+              className="bg-gradient-to-tr from-[#1E152D] to-[#7D5CB2] text-white shadow-lg w-full"
+            > */}
+                        View Details
+                        {/* </Button> */}
+                      </Link>
+                    </div>
+                  </div>
+                </CardBody>
+              </Card>
             </div>
           );
         })}
       </Filter>
-      <Favourites />
+      
       <BottomHome />
     </Layout>
   );
 };
 
 export default Home;
-function Cards(propertyList, setLiked, liked, address) {
-  return (
-    <Card
-      isBlurred
-      className="border-none bg-background/60 dark:bg-default-100/50 w-[100%] h-[35vh] "
-      shadow="sm"
-    >
-      <CardBody>
-        <div className="grid items-center justify-center grid-cols-6 gap-6 md:grid-cols-12 md:gap-4">
-          <div className="relative col-span-6 md:col-span-4">
-            <Image
-              alt="Album cover"
-              className="object-cover"
-              height={200}
-              shadow="md"
-              // src=""
-              src={propertyList?.fetchProp[14]?.image}
-              width="100%"
-            />
-          </div>
-
-          <div className="flex flex-col col-span-6 md:col-span-8">
-            <div className="flex items-start justify-between">
-              <div className="flex flex-col gap-0">
-                <h3 className="font-semibold text-foreground/90">
-                  {console.log(propertyList)}
-                  {propertyList?.fetchProp[14]?.title}
-                </h3>
-                <p className="text-small text-foreground/80">12 Tracks</p>
-                <h1 className="mt-2 font-medium text-large">Frontend Radio</h1>
-              </div>
-              <Button
-                isIconOnly
-                className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2"
-                radius="full"
-                variant="light"
-                onPress={() => setLiked((v) => !v)}
-              >
-                <HeartIcon
-                  className={liked ? "[&>path]:stroke-transparent" : ""}
-                  fill={liked ? "currentColor" : "none"}
-                />
-              </Button>
-            </div>
-
-            <div className="flex flex-col gap-1 mt-3">
-              <div className="flex justify-between">
-                <p className="text-small">1:23</p>
-                <p className="text-small text-foreground/50">4:32</p>
-              </div>
-              <Web3Button
-                contractAddress={import.meta.env.VITE_CONTRACT_ADDRESS}
-                action={(contract) => {
-                  contract.call("createTransaction", [
-                    address,
-                    12,
-                    3000000000000000,
-                  ]);
-                }}
-              >
-                Buy Now
-              </Web3Button>
-            </div>
-          </div>
-        </div>
-      </CardBody>
-    </Card>
-  );
-}

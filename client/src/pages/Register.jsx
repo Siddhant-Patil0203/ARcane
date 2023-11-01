@@ -12,7 +12,7 @@ import { SunIcon } from "../components/SunIcon";
 import { ImGoogle } from "react-icons/im";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 
 const initialForm = {
   name: "",
@@ -97,11 +97,10 @@ const Register = () => {
 
   return (
     <>
-      <Navbar />
       <div className="h-screen w-screen">
         <div className="flex  flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight dark:text-white">
               Sign in to your account
             </h2>
           </div>
@@ -111,7 +110,7 @@ const Register = () => {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium leading-6 text-white"
+                  className="block text-sm font-medium leading-6 dark:text-white"
                 >
                   Name
                 </label>
@@ -125,7 +124,7 @@ const Register = () => {
                     onChange={handleChange}
                     isInvalid={errors.name ? true : false}
                     isRequired
-                    className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#399770] "
+                    className="block w-full rounded-md border-0 p-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#399770] "
                   />
                   {errors.name && (
                     <div className="m-2 text-red-500">{errors.name}</div>
@@ -136,7 +135,7 @@ const Register = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-white"
+                  className="block text-sm font-medium leading-6 dark:text-white"
                 >
                   Email address
                 </label>
@@ -162,7 +161,7 @@ const Register = () => {
                 <div className="flex items-center justify-between">
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-white"
+                    className="block text-sm font-medium leading-6 dark:text-white"
                   >
                     Password
                   </label>
@@ -177,7 +176,7 @@ const Register = () => {
                     onChange={handleChange}
                     isInvalid={errors.password ? true : false}
                     isRequired
-                    className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
+                    className="block w-full rounded-md border-0 p-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
                   />
                   {errors.password && (
                     <div className="p-1 m-2 text-red-500">
@@ -190,7 +189,7 @@ const Register = () => {
                 <div className="flex items-center justify-between">
                   <label
                     htmlFor="confirmPassword"
-                    className="block text-sm font-medium leading-6 text-white"
+                    className="block text-sm font-medium leading-6 dark:text-white"
                   >
                     Confirm Password
                   </label>
@@ -205,7 +204,7 @@ const Register = () => {
                     onChange={handleChange}
                     isInvalid={errors.confirmPassword ? true : false}
                     isRequired
-                    className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
+                    className="block w-full rounded-md border-0 p-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
                   />
                   {errors.confirmPassword && (
                     <div className="p-1 m-2 text-red-500">
@@ -252,7 +251,6 @@ const Register = () => {
       </div>
 
       {isLoading ? <Loader width="500px" height="250px" /> : null}
-      
     </>
   );
 };

@@ -5,6 +5,6 @@ export const Layout = ({ children }) => (
   <>
     <NavBar />
     <div className=""> {children}</div>
-    <Footer/>
+    <div className="block bottom-0"><Footer/></div>
   </>
 );
