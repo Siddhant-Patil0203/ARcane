@@ -9,6 +9,7 @@ import Loader from "../components/Loader";
 import axios from "../axios";
 
 import { useTheme } from "next-themes";
+
 import {
   Switch,
   Button,
@@ -21,6 +22,15 @@ import {
 } from "@nextui-org/react";
 import { MoonIcon } from "../components/MoonIcon";
 import { SunIcon } from "../components/SunIcon";
+
+import {
+  ConnectWallet,
+  Web3Button,
+  useAddress,
+  useContract,
+  useContractRead,
+} from "@thirdweb-dev/react";
+import { ethers } from "ethers";
 
 const Home = () => {
   const { theme, setTheme } = useTheme();
@@ -51,6 +61,19 @@ const Home = () => {
       console.log(error);
     }
   };
+
+  const address = useAddress();
+  const { contract } = useContract(import.meta.env.VITE_CONTRACT_ADDRESS);
+  const { data, laoading } = useContractRead(
+    contract,
+    "getTransactionByProductID",
+    [12]
+  );
+  console.log(data);
+  if (data) {
+    const amount = ethers.utils.formatUnits(data[2], 0);
+    console.log(amount);
+  }
 
   return (
     <>
@@ -114,6 +137,7 @@ const Home = () => {
           <p className="font-bold uppercase text-tiny text-black/60">2BHK</p>
           <h4 className="text-2xl font-medium text-gray">Nagpur</h4>
         </CardHeader>
+
         <Image
           removeWrapper
           alt="Card example background"
@@ -137,6 +161,57 @@ const Home = () => {
           </Button>
         </CardFooter>
       </Card>
+      <main className="main">
+        <div className="container">
+          <div className="header">
+            <div className="connect">
+              <ConnectWallet
+                dropdownPosition={{
+                  side: "bottom",
+                  align: "center",
+                }}
+              />
+            </div>
+            {/* <input
+            value={args}
+            onChange={(value) => setArgs(value.target.value)}
+          /> */}
+            <Web3Button
+              contractAddress={import.meta.env.VITE_CONTRACT_ADDRESS}
+              action={(contract) => {
+                contract.call("createTransaction", [
+                  address,
+                  12,
+                  3000000000000000,
+                ]);
+              }}
+            >
+              Buy
+            </Web3Button>
+          </div>
+          <div className="content">
+            <div className="card" style={{}}>
+              {/* {laoading ? (
+                  "Loading..."
+                ) : (
+                  <>
+                    <div className="card__header">
+                      <h2>Product Details :-</h2>
+                    </div>
+                    <div className="card__body">
+                      <p>Amount :- {ethers.utils.formatUnits(data[3], 18)}</p>
+                      <p>
+                        Product Id :- {ethers.utils.formatUnits(data[2], 0)}
+                      </p>
+                      <p>Product seller :- {data[1]}</p>
+                      <p>Product buyer :- {data[0]}</p>
+                    </div>
+                  </>
+                )} */}
+            </div>
+          </div>
+        </div>
+      </main>
     </>
   );
 };
