@@ -22,6 +22,7 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { toast } from "react-hot-toast";
 
 const initialForm = {
   title: "",
@@ -219,7 +220,13 @@ const Dashboard = () => {
                         color="danger"
                         radius="full"
                         size="sm"
-                        onClick={() => deleteProperty(item._id)}
+                        onClick={() =>
+                          toast.promise(deleteProperty(item._id), {
+                            loading: "Deleting...",
+                            success: "Deleted successfully",
+                            error: "Error deleting property",
+                          })
+                        }
                       >
                         Delete Property
                       </Button>
