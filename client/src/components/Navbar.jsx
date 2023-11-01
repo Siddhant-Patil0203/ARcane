@@ -92,7 +92,7 @@ export default function App() {
             Delete Account        
           </Button>
         </NavbarItem>
-        <NavbarItem>
+        {/* <NavbarItem>
           <User
             name={user.result.name}
             description={user.result.email}
@@ -102,7 +102,7 @@ export default function App() {
                 "https://img.icons8.com/?size=256&id=kDoeg22e5jUY&format=png",
             }}
           />
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
 
       <NavbarContent justify="end">

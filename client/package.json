@@ -11,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@nextui-org/react": "^2.1.13",
     "@nextui-org/system": "^2.0.10",
