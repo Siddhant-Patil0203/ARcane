@@ -235,8 +235,6 @@ const Home = () => {
           );
         })}
       </Filter>
-      
-      <BottomHome />
     </Layout>
   );
 };
