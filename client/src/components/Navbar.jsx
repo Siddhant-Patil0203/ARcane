@@ -70,9 +70,9 @@ export default function NavBar() {
   };
   function success(pos) {
     var crd = pos.coords;
-    console.log("Your current position is:");
-    console.log(`Latitude : ${crd.latitude}`);
-    console.log(`Longitude: ${crd.longitude}`);
+    // console.log("Your current position is:");
+    // console.log(`Latitude : ${crd.latitude}`);
+    // console.log(`Longitude: ${crd.longitude}`);
   }
 
   function errors(err) {
@@ -80,13 +80,13 @@ export default function NavBar() {
   }
   const [cityName, setCityName] = useState("");
   useEffect(() => {
-    const longitude = 37.7749;
-    const latitude = -122.4194;
+    const longitude = 21.2544841;
+    const latitude = 81.6139649;
     if (navigator.geolocation) {
       navigator.permissions
         .query({ name: "geolocation" })
         .then(function (result) {
-          console.log(result);
+          // console.log(result);
           if (result.state === "granted") {
             //If granted then you can directly call your function here
             navigator.geolocation.getCurrentPosition(success, errors, options);
@@ -101,45 +101,43 @@ export default function NavBar() {
       console.log("Geolocation is not supported by this browser.");
     }
 
-    axios
-      .get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json`,
-        {
-          params: {
-            access_token: MapboxAPIKey,
-          },
-        }
-      )
-      .then((response) => {
-        const data = response.data;
-        let cityFound = false;
+    // axios
+    //   .get(
+    //     `https://api.mapbox.com/geocoding/v5/mapbox.places/-73.989,40.733.json?access_token=pk.eyJ1Ijoic2lkZDAyMDMiLCJhIjoiY2xudnoxejQ2MDRtZjJqbnc3ejY3dWZ6bSJ9.sMTwpGbl-wpTEJRCAe6Qeg`,
+    //   )
+    //   .then((response) => {
+    //     console.log("vishal bhauuuuu");
+    //     const data = response.data;
+    //     let cityFound = false;
+    //     // console.log(data);
 
-        for (const feature of data.features) {
-          if (feature.place_type.includes("city") && feature.text) {
-            setCityName(feature.text);
-            cityFound = true;
-            console.log(cityName);
-            break;
-          }
-        }
+    //     for (const feature of data.features) {
+    //       console.log("vishal bhauuuuu");
+    //       if (feature.place_type.includes("city") && feature.text) {
+    //         setCityName(feature.text);
+    //         cityFound = true;
+    //         console.log(cityName);
+    //         break;
+    //       }
+    //     }
 
-        if (!cityFound) {
-          setCityName("City not found");
-        } else {
-          console.log("cityName");
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data from Mapbox API:", error);
-      });
+    //     if (!cityFound) {
+    //       setCityName("City not found");
+    //     } else {
+    //       console.log("cityName");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching data from Mapbox API:", error);
+    //   });
   }, []);
   return (
     <Navbar isBordered className=" sticky top-[0vh]">
       <NavbarBrand className="mr-4 space-x-3">
-        <img src={Logo} className=" w-9 " />
-        <p className="hidden sm:block font-bold text-inherit ">ARcane</p>
+        <img src={Logo} className=" w-9" />
+        <p className="hidden font-bold sm:block text-inherit ">ARcane</p>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarItem>
           <Link color="foreground" href="#">
             Buy
@@ -199,12 +197,12 @@ export default function NavBar() {
             </NavbarItem>
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
+            <DropdownItem key="profile" className="gap-2 h-14">
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{user.result.email}</p>
             </DropdownItem>
-            <DropdownItem key="settings">My Dashboard</DropdownItem>
-            <DropdownItem key="configurations"> <Link to="/favourites">Favourites</Link></DropdownItem>
+            <DropdownItem key="settings"><Link to="/dashboard/seller">My Dashboard</Link></DropdownItem>
+            <DropdownItem key="configurations"> <Link to="/user/favourites">Favourites</Link></DropdownItem>
             <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
             <DropdownItem key="logout" color="danger">
               <Button

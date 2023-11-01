@@ -31,15 +31,69 @@ export const addComments = async (req,res) => {
 }
 
 export const getComments = async (req,res) => {
-    res.send("Fetched");
+    const id = req.params.id;
+    
+    try {
+        const comments = await reviews.find({propertyId:id});
+        if(!comments) return res.json({message:"Nothing to fetch"});
+        res.json({
+            success:true,
+            comments
+        })
+    } catch (error) {
+        res.status(400).json({
+            success:false,
+            message:error.message
+        })
+    }
 }
 
 export const updateComments = async (req,res) => {
-    res.send("updated");
+  
+    const id = req.params.id;
+    try {
+        const updatedComment = await reviews.findByIdAndUpdate(
+        id,
+        req.body,
+        {new:true}
+       ) 
+
+       if(!updateComments) return res.status(404).json({success:false,message:"invalid message"});
+
+       res.json({
+        success:true,
+        message:"comment edited",
+        updatedComment
+       })
+
+    } catch (error) {
+        res.status(400).json({
+            success:false,
+            message:error.message
+        })
+    }
 }
 
 export const deleteComments = async (req,res) => {
-    res.send("deleted")
+    const id = req.params.id;
+    try {
+        const deleted = await reviews.findByIdAndDelete({_id:id});
+        if(!deleted) return res.status(404).json({
+            success:flase,
+            message:"Invalid Id"
+        })
+
+        res.status(200).json({
+            success:true,
+            message:"successfully deleted"
+        })
+
+    } catch (error) {
+        res.status(400).json({
+            success:false,
+            message:error.message
+        })
+    }
 }
 
 

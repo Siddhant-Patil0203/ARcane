@@ -107,14 +107,17 @@ const Home = () => {
     console.log("UseEffect :" + propertyList);
   }, []);
 
-  const addToFav = async (index) => {
+  const addToFav = async (id) => {
     // setIsLoading(true);
 
+    console.log(id);
     try {
-      await axios.post(
-        `/api/v1/fav/addFav/:${propertyList?.fetchProp[index]?._id}`
+      const res = await axios.post(
+
+        `/api/v1/fav/addFav/${id}`
       );
-      // setIsLoading(false);
+      const result = res.data;
+      console.log(result);
     } catch (err) {
       console.error(err);
       // setIsLoading(false);
@@ -201,22 +204,17 @@ const Home = () => {
                         </div>
                         <Button
                           isIconOnly
-                          className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2"
-                          radius="full"
-                          variant="light"
-                          onPress={() => setLiked((v) => !v)}
+                          color="danger"
+                          variant="shadow"
+                          className="w-[100px]"
+                          onClick={() => addToFav(item._id)}
                         >
-                          <HeartIcon
-                            className={
-                              liked ? "[&>path]:stroke-transparent" : ""
-                            }
-                            fill={liked ? "currentColor" : "none"}
-                          />
+                          add to fav
                         </Button>
                       </div>
 
                       <div className="flex flex-col gap-1 mt-3">
-                        <p>$ {item?.price}.00 /-</p>
+                        <p> {`${item?.price} .00 /-`}</p>
                       </div>
 
                       <Link to="/details" state={{item}}>

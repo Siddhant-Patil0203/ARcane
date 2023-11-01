@@ -3,8 +3,8 @@ import { addComments, deleteComments, getComments, updateComments } from "../con
 import authUser from "../middlewares/authUser.js";
 const router = express.Router();
 
-router.get("/",authUser , getComments);
 router.post("/add/:id" , addComments);
+router.get("/get/:id",authUser , getComments);
 router.put("/update/:id",authUser , updateComments);
 router.delete("/delete/:id",authUser , deleteComments);
 
