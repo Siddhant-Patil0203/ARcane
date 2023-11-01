@@ -1,0 +1,39 @@
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import cors from "cors";
+import * as dotenv from "dotenv";
+dotenv.config();
+
+import userRoutes from "./routes/user.js";
+import googleAuthRoutes from "./routes/googleAuth.js"
+import initializePassport from './middlewares/passportConfig.js';
+import dalleRoutes from "./routes/dalle.js";
+import profileRoutes from "./routes/profile.js";
+
+const app = express();
+
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors());
+
+initializePassport(app)
+
+app.get("/", (req, res) => {
+  res.send("Sidd0203 Server");
+});
+
+app.use("/user", userRoutes);
+app.use("/auth", googleAuthRoutes)
+app.use("/api/v1/dalle", dalleRoutes);
+app.use("/profile", profileRoutes);
+
+const CONNECTION_URL = process.env.MONGO_URL;
+const PORT = process.env.PORT || 5000;
+
+mongoose
+  .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() =>
+    app.listen(PORT, () => console.log(`Server running on PORT: ${PORT}`))
+  )
+  .catch((error) => console.log(error.message));

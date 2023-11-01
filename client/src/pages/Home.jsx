@@ -54,7 +54,7 @@ const Home = () => {
 
   return (
     <>
-      {isLoading ? <Loader width="500px" height="250px" /> : null}
+      {/* {isLoading ? <Loader width="500px" height="250px" /> : null}
       <div className="flex justify-between m-2">
         <div className="m-2 text-2xl text-center">Home</div>
         <User
@@ -135,7 +135,8 @@ const Home = () => {
             Visit Home
           </Button>
         </CardFooter>
-      </Card>
+      </Card> */}
+      Home
     </>
   );
 };
