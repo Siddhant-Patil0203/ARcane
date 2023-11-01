@@ -131,7 +131,6 @@ const Home = () => {
             color="primary"
             radius="full"
             size="sm"
-            disabled
           >
             Visit Home
           </Button>
