@@ -1,15 +1,43 @@
 import mongoose from "mongoose";
 
 // yet to add required
-const favouriteSchema = new mongoose({
-    propertyId : {
+const favouriteSchema = new mongoose.Schema({
+    propertyId : { //from params
         type:String
     },
-    userId:{
+    userId:{ //from middleware
+        type:String, 
+    },
+    title:{
         type:String,
-    }
+    },
+    image:{
+        type:String,
+    },
+    description:{
+        type:String,
+    },
+    price:{
+        type:Number
+    },
+    location:{
+        type:String
+    },
+    size:{
+        type:String
+    },
+    status:{
+        type:String,
+        default:"Listed",
+    },
+    blockchainId:{
+        type:String,
+    },
+    ListingDate:{
+        type : Date,
+        default : Date.now,
+    },
+    
 })
 
-const Favourites = mongoose.model("Properties",favouriteSchema);
-
-export default Favourites;
+export default mongoose.model("Favourites",favouriteSchema);
