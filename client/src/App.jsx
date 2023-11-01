@@ -23,12 +23,10 @@ function App() {
           <Route path="/dashboard/seller" element={<Dashboard />} />
           <Route path="/dashboard/seller/update" element={<DashboardUpdate />} />
           <Route path="/user/favourites" element={<YourList />} />
-
         </Route>
-       
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
       </Routes>
     </NextThemesProvider>
   );
