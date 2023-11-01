@@ -22,7 +22,6 @@ const initialForm = {
   price: "",
   location: "",
   size: "",
-  image: "",
 };
 import Filter from "../components/Filter";
 import { ImQrcode } from "react-icons/im";
