@@ -32,8 +32,6 @@ const initialForm = {
   location: "",
   size: "",
 };
-import Filter from "../components/Filter";
-import { ImMoveDown, ImQrcode } from "react-icons/im";
 import PropertyForm from "../components/PropertyForm.jsx";
 import QrCode from "../components/QrCode.jsx";
 import StatsTable from "../components/Stats.jsx";
@@ -60,8 +58,10 @@ const Dashboard = () => {
       const result = res.data;
       console.log(result);
       setIsLoading(false);
+      toast.success("Property added successfully");
     } catch (error) {
       setIsLoading(false);
+      toast.error("Error adding property");
     }
   };
 
