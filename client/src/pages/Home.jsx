@@ -166,7 +166,7 @@ function Cards(propertyList, setLiked, liked, address) {
   return (
     <Card
       isBlurred
-      className="border-none bg-background/60 dark:bg-default-100/50 w-[100%] h-[35vh] "
+      className="border-none bg-background/60 dark:bg-default-100/50 "
       shadow="sm"
     >
       <CardBody>
