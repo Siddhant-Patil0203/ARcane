@@ -71,7 +71,7 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    window.location.href = "https://arcane-server.vercel.app/auth/google";
+    window.location.href = "http://locolhost:5000/auth/google";
   };
   //Google Auth Redirect
   const queryParams = new URLSearchParams(window.location.search);
@@ -94,7 +94,6 @@ const Login = () => {
 
   return (
     <>
-      <Navbar />
       {isLoading ? <Loader width="500px" height="250px" /> : null}
 
       <div className="h-screen w-screen">

@@ -97,7 +97,6 @@ const Register = () => {
 
   return (
     <>
-      <Navbar />
       <div className="h-screen w-screen">
         <div className="flex  flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -177,7 +176,7 @@ const Register = () => {
                     onChange={handleChange}
                     isInvalid={errors.password ? true : false}
                     isRequired
-                    className="block w-full rounded-md border-0 p-1.5 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
+                    className="block w-full rounded-md border-0 p-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
                   />
                   {errors.password && (
                     <div className="p-1 m-2 text-red-500">
