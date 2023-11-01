@@ -16,6 +16,7 @@ export const getProperties = async (req,res) => {
     }
 }
 
+// /api/v1/properties/fetch/:status 
 export const getPropertiesByStatus = async (req,res) => {
     try {
         const fetchProp = await properties.find({status:req.params.status});
@@ -31,7 +32,7 @@ export const getPropertiesByStatus = async (req,res) => {
     }
 }
 
-// route /api/v1/properties/Add PROTECTED
+// route /api/v1/properties/Add (PROTECTED)
 export const addProperty = async (req,res) => {
     const {title , image , description, price ,location, size, status, blockchainId} = req.body;
     const userId = req.userId;
@@ -52,11 +53,17 @@ export const addProperty = async (req,res) => {
     }
 }
 
+//  /api/v1/properties/update/:id  (PROTECTED)
 export const updateProperty = async (req,res) => {
+
+    const id = req.params.id;
+   
     try {
+       const updatedProperty = await properties.findByIdAndUpdate(id, req.body, { new: true });
         res.json({
             success:true,
-            message:"Property updated"
+            message:"Property updated",
+            updatedProperty
         })
     } catch (error) {
         res.status(400).json({
@@ -66,9 +73,11 @@ export const updateProperty = async (req,res) => {
     }
 }
 
-
+// /api/v1/properties/delete/:id (PROTECTED)
 export const deleteProperty = async (req,res) => {
     try {
+        const id = req.params.id;
+        await properties.findByIdAndDelete({_id:id});
         res.json({
             success:true,
             message:"Property deleted"

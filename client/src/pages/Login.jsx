@@ -10,6 +10,8 @@ import { Switch, Input, Button } from "@nextui-org/react";
 import { MoonIcon } from "../components/MoonIcon";
 import { SunIcon } from "../components/SunIcon";
 import { ImGoogle } from "react-icons/im";
+import { Toaster, toast } from "react-hot-toast";
+import Navbar from "../components/Navbar";
 
 const initialForm = {
   email: "",
@@ -84,7 +86,7 @@ const Login = () => {
       userG.token = token;
       localStorage.setItem("user", JSON.stringify(userG));
       setUser(JSON.parse(localStorage.getItem("user")));
-      
+
       setIsLoading(false);
       navigateTo("/");
     }, []);
@@ -92,83 +94,117 @@ const Login = () => {
 
   return (
     <>
+      <Navbar />
       {isLoading ? <Loader width="500px" height="250px" /> : null}
-      <div className="flex justify-between m-5 text-2xl text-center">
-        Login
-        <Switch
-          defaultSelected
-          size="lg"
-          color="primary"
-          thumbIcon={({ isSelected, className }) =>
-            !isSelected ? (
-              <SunIcon className={className} />
-            ) : (
-              <MoonIcon className={className} />
-            )
-          }
-          onClick={() => {
-            if (theme === "light") {
-              setTheme("dark");
-            } else if (theme === "dark") {
-              setTheme("light");
-            }
-          }}
-        />
-      </div>
-      <form onSubmit={handleSumbmit}>
-        <Input
-          type="email"
-          label="Email"
-          name="email"
-          id="email"
-          value={form.email}
-          onChange={handleChange}
-          isInvalid={errors.email ? true : false}
-          isRequired
-          variant="underlined"
-          className="m-3 w-[300px]"
-        />
-        {errors.email && <div className="m-2 text-red-500">{errors.email}</div>}
-        <Input
-          type="password"
-          label="Password"
-          name="password"
-          id="password"
-          value={form.password}
-          onChange={handleChange}
-          isInvalid={errors.password ? true : false}
-          isRequired
-          variant="underlined"
-          className="m-3 w-[300px]"
-        />
-        {errors.password && (
-          <div className="p-1 m-2 text-red-500">{errors.password}</div>
-        )}
-        <Button
-          type="submit"
-          className="flex m-2 "
-          color="primary"
-          variant="shadow"
-          isLoading={isLoading}
-        >
-          Sign in
-        </Button>
-        <Button
-          onClick={googleSignin}
-          className="flex m-2"
-          color="primary"
-          variant="shadow"
-          isLoading={isLoading}
-          startContent={<ImGoogle />}
-        >
-          Sign in with Google
-        </Button>
-        {serverMsg && <div className="p-1 m-2 text-red-500">{serverMsg}</div>}
-      </form>
 
-      <Link to="/register" className="p-2 m-2 text-primary">
-        Register?
-      </Link>
+      <div className="h-screen w-screen">
+        <div className="flex  flex-col justify-center    mx-5 lg:mx-0 px-6 py-5 lg:px-8">
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
+            <h2 className=" mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+              Sign in to your account
+            </h2>
+          </div>
+
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form
+              className="space-y-6"
+              action="#"
+              method="POST"
+              onSubmit={handleSumbmit}
+            >
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-6 text-white"
+                >
+                  Email address
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    isInvalid={errors.email ? true : false}
+                    isRequired
+                    className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#399770] "
+                    //   onChange={(e) => setUser({ ...user, email: e.target.value })}
+                  />
+                </div>
+              </div>
+              {errors.email && (
+                <div className="m-2 text-red-500">{errors.email}</div>
+              )}
+              <div>
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Password
+                  </label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    value={form.password}
+                    onChange={handleChange}
+                    isInvalid={errors.password ? true : false}
+                    isRequired
+                    className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
+                    //   onChange={(e) =>
+                    //     setUser({ ...user, password: e.target.value })
+                    //   }
+                  />
+                  {errors.password && (
+                    <div className="p-1 m-2 text-red-500">
+                      {errors.password}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-[#25C07F] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#399770] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                  // onClick={onSignup}
+                >
+                  Log in
+                </button>
+                <Button
+                  onClick={googleSignin}
+                  className="flex w-full mt-3"
+                  color="primary"
+                  radius="sm"
+                  // variant="shadow"
+                  isLoading={isLoading}
+                  startContent={<ImGoogle />}
+                >
+                  Sign in with Google
+                </Button>
+                {serverMsg && (
+                  <div className="p-1 m-2 text-red-500">{serverMsg}</div>
+                )}
+              </div>
+            </form>
+            <div className="mt-5 flex ">
+              New User ? {"  "}
+              <Link to="/register" className="text-primary">
+                <center>&nbsp; Signup</center>
+              </Link>
+            </div>
+          </div>
+        </div>{" "}
+        <div>
+          <Toaster />
+        </div>
+      </div>
     </>
   );
 };
