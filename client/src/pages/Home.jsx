@@ -11,6 +11,7 @@ import { ethers } from "ethers";
 import { HeartIcon } from "../components/HeartIcon";
 import { Layout } from "../components/Layout";
 import axios from "../axios";
+import BottomHome from "../components/BottomHome";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,19 +40,23 @@ const Home = () => {
     // setIsLoading(true);
 
     try {
-      await axios.post(`/api/v1/fav/addFav/:${propertyList?.fetchProp[index]?._id}`)
+      await axios.post(
+        `/api/v1/fav/addFav/:${propertyList?.fetchProp[index]?._id}`
+      );
       // setIsLoading(false);
     } catch (err) {
       console.error(err);
       // setIsLoading(false);
     }
   };
-  
+
   const removeFromFav = async (index) => {
     // setIsLoading(true);
 
     try {
-      await axios.post(`/api/v1/fav/remFav/:${propertyList?.fetchProp[index]?._id}`)
+      await axios.post(
+        `/api/v1/fav/remFav/:${propertyList?.fetchProp[index]?._id}`
+      );
       // setIsLoading(false);
     } catch (err) {
       console.error(err);
@@ -142,8 +147,8 @@ const Home = () => {
           </div>
         </CardBody>
       </Card>
+      <BottomHome />
     </Layout>
-    
   );
 };
 
