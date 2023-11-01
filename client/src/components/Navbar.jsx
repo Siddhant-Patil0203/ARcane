@@ -17,8 +17,8 @@ import { useGlobalContext } from "../contexts/GlobalContext";
 import { useEffect, useState } from "react";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { MdDeleteOutline } from "react-icons/md";
-import Loader from "../components/Loader";
 import axios from "../axios";
+import { User } from "@nextui-org/react";
 
 export default function App() {
   const { theme, setTheme } = useTheme();
@@ -91,6 +91,17 @@ export default function App() {
           >
             Delete Account        
           </Button>
+        </NavbarItem>
+        <NavbarItem>
+          <User
+            name={user.result.name}
+            description={user.result.email}
+            avatarProps={{
+              src:
+                (user && user.result.picture) ||
+                "https://img.icons8.com/?size=256&id=kDoeg22e5jUY&format=png",
+            }}
+          />
         </NavbarItem>
       </NavbarContent>
 
