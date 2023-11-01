@@ -97,10 +97,10 @@ const Login = () => {
       <Navbar />
       {isLoading ? <Loader width="500px" height="250px" /> : null}
 
-      <div className="h-screen w-screen">
-        <div className="flex  flex-col justify-center    mx-5 lg:mx-0 px-6 py-5 lg:px-8">
+      <div className="w-screen h-screen">
+        <div className="flex flex-col justify-center px-6 py-5 mx-5 lg:mx-0 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
-            <h2 className=" mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+            <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-center text-white ">
               Sign in to your account
             </h2>
           </div>
@@ -193,7 +193,7 @@ const Login = () => {
                 )}
               </div>
             </form>
-            <div className="mt-5 flex ">
+            <div className="flex mt-5 ">
               New User ? {"  "}
               <Link to="/register" className="text-primary">
                 <center>&nbsp; Signup</center>

@@ -74,9 +74,9 @@ const filters = [
   },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(" ");
+// }
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
