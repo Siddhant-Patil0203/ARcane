@@ -200,7 +200,7 @@ const Home = () => {
                       </div>
 
                       <div className="flex flex-col gap-1 mt-3">
-                        <p>$ {item?.price}.00 /-</p>
+                        <p> {`${item?.price} .00 /-`}</p>
                       </div>
 
                       <Link to="/details" state={{item}}>
