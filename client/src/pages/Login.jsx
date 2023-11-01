@@ -111,62 +111,31 @@ const Login = () => {
               method="POST"
               onSubmit={handleSumbmit}
             >
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 dark:text-white"
-                >
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    isInvalid={errors.email ? true : false}
-                    isRequired
-                    className="block w-full rounded-md border-0 p-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#399770] "
-                    //   onChange={(e) => setUser({ ...user, email: e.target.value })}
-                  />
-                </div>
-              </div>
-              {errors.email && (
-                <div className="m-2 text-red-500">{errors.email}</div>
-              )}
-              <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 dark:text-white"
-                  >
-                    Password
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    value={form.password}
-                    onChange={handleChange}
-                    isInvalid={errors.password ? true : false}
-                    isRequired
-                    className="block w-full rounded-md border-0 p-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-[#399770]"
-                    //   onChange={(e) =>
-                    //     setUser({ ...user, password: e.target.value })
-                    //   }
-                  />
-                  {errors.password && (
-                    <div className="p-1 m-2 text-red-500">
-                      {errors.password}
-                    </div>
-                  )}
-                </div>
-              </div>
+              <Input
+                label="Email"
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                value={form.email}
+                onChange={handleChange}
+                isInvalid={errors.email ? true : false}
+                isRequired
+
+                //   onChange={(e) => setUser({ ...user, email: e.target.value })}
+              />
+
+              <Input
+                id="password"
+                label="Password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                value={form.password}
+                onChange={handleChange}
+                isInvalid={errors.password ? true : false}
+                isRequired
+              />
 
               <div>
                 <button

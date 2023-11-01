@@ -1,26 +1,15 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import Loader from "../components/Loader";
 import { Button, Card, CardBody, Image } from "@nextui-org/react";
-import {
-  Web3Button,
-  useAddress,
-  useContract,
-  useContractRead,
-} from "@thirdweb-dev/react";
+import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import { HeartIcon } from "../components/HeartIcon";
 import { Layout } from "../components/Layout";
 import axios from "../axios";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
+
 import Filter from "../components/Filter";
+import { ImCalendar, ImCross, ImLocation } from "react-icons/im";
+import { Link } from "@nextui-org/react";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -186,12 +175,21 @@ function Cards(propertyList, setLiked, liked, address) {
           <div className="flex flex-col col-span-6 md:col-span-8">
             <div className="flex items-start justify-between">
               <div className="flex flex-col gap-0">
-                <h3 className="font-semibold text-foreground/90">
+                <h1 className="font-medium text-2xl text-foreground/90">
                   {console.log(propertyList)}
                   {propertyList?.fetchProp[14]?.title}
-                </h3>
-                <p className="text-small text-foreground/80">12 Tracks</p>
-                <h1 className="mt-2 font-medium text-large">Frontend Radio</h1>
+                </h1>
+                <p className="text-small text-foreground/80 mt-1">
+                  <ImLocation className="inline-block mr-1" />
+                  {propertyList?.fetchProp[14]?.location}
+                </p>
+                <p className="text-small text-foreground/80 mt-1">
+                  <ImCross className="inline-block mr-1" />
+                  {propertyList?.fetchProp[14]?.size}
+                </p>
+                <h4 className="mt-4 font-semibold">
+                  Current Status :- {propertyList?.fetchProp[14]?.status}
+                </h4>
               </div>
               <Button
                 isIconOnly
@@ -208,22 +206,7 @@ function Cards(propertyList, setLiked, liked, address) {
             </div>
 
             <div className="flex flex-col gap-1 mt-3">
-              <div className="flex justify-between">
-                <p className="text-small">1:23</p>
-                <p className="text-small text-foreground/50">4:32</p>
-              </div>
-              <Web3Button
-                contractAddress={import.meta.env.VITE_CONTRACT_ADDRESS}
-                action={(contract) => {
-                  contract.call("createTransaction", [
-                    address,
-                    12,
-                    3000000000000000,
-                  ]);
-                }}
-              >
-                Buy Now
-              </Web3Button>
+              <Link>$ {propertyList?.fetchProp[14]?.price}.00 /-</Link>
             </div>
           </div>
         </div>
