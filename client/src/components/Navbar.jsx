@@ -9,6 +9,11 @@ import {
   NavbarItem,
   Link,
   Button,
+  DropdownItem,
+  DropdownTrigger,
+  Dropdown,
+  DropdownMenu,
+  Avatar,
 } from "@nextui-org/react";
 import { MoonIcon } from "../components/MoonIcon";
 import { SunIcon } from "../components/SunIcon";
@@ -19,6 +24,7 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import { MdDeleteOutline } from "react-icons/md";
 import axios from "../axios";
 import { User } from "@nextui-org/react";
+import Logo from "../assets/logo(Short).png";
 
 export default function App() {
   const { theme, setTheme } = useTheme();
@@ -27,7 +33,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
   }, []);
 
   const logout = () => {
@@ -51,17 +57,23 @@ export default function App() {
   };
   return (
     <Navbar isBordered className="">
-      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
-        <NavbarBrand className="mr-4">
-          <p className="hidden font-bold sm:block text-inherit">ARcane</p>
-        </NavbarBrand>
+      <NavbarBrand className="mr-4 space-x-3">
+        <img src={Logo} className=" w-9 " />
+        <p className="hidden sm:block font-bold text-inherit ">ARcane</p>
+      </NavbarBrand>
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link color="foreground" href="#">
             Buy
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+          <Link href="#" color="foreground" aria-current="page">
+            Rent
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive>
+          <Link href="#" color="foreground" aria-current="page">
             Sell
           </Link>
         </NavbarItem>
@@ -69,39 +81,6 @@ export default function App() {
           <Link color="foreground" href="#">
             About
           </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button
-            onClick={logout}
-            className="flex m-2"
-            color="danger"
-            variant="bordered"
-            startContent={<RiLogoutCircleLine />}
-          >
-            logout
-          </Button>
-        </NavbarItem>
-        <NavbarItem>
-          <Button
-            onClick={deleteUser}
-            className="flex m-2"
-            color="danger"
-            variant="shadow"
-            startContent={<MdDeleteOutline />}
-          >
-            Delete Account 
-          </Button>
-        </NavbarItem>
-        <NavbarItem>
-          {/* <User
-            name={user.result.name}
-            description={user.result.email}
-            avatarProps={{
-              src:
-                (user && user.result.picture) ||
-                "https://img.icons8.com/?size=256&id=kDoeg22e5jUY&format=png",
-            }}
-          /> */}
         </NavbarItem>
       </NavbarContent>
 
@@ -127,6 +106,52 @@ export default function App() {
             }}
           />
         </NavbarItem>
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <NavbarItem>
+              <User
+                name={user.result.name}
+                description={user.result.email}
+                avatarProps={{
+                  src:
+                    (user && user.result.picture) ||
+                    "https://img.icons8.com/?size=256&id=kDoeg22e5jUY&format=png",
+                }}
+              />
+            </NavbarItem>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Profile Actions" variant="flat">
+            <DropdownItem key="profile" className="h-14 gap-2">
+              <p className="font-semibold">Signed in as</p>
+              <p className="font-semibold">{user.result.email}</p>
+            </DropdownItem>
+            <DropdownItem key="settings">My Settings</DropdownItem>
+            <DropdownItem key="configurations">Configurations</DropdownItem>
+            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+            <DropdownItem key="logout" color="danger">
+              <Button
+                onClick={logout}
+                className="flex "
+                color="danger"
+                variant="bordered"
+                startContent={<RiLogoutCircleLine />}
+              >
+                logout
+              </Button>
+            </DropdownItem>
+            <DropdownItem>
+              <Button
+                onClick={deleteUser}
+                className="flex mt-3"
+                color="danger"
+                variant="shadow"
+                startContent={<MdDeleteOutline />}
+              >
+                Delete Account
+              </Button>
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </NavbarContent>
     </Navbar>
   );
