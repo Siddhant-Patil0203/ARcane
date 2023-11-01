@@ -1,8 +1,10 @@
-import Navbar from "./Navbar";
+import Footer from "./Footer";
+import NavBar from "./Navbar";
 
 export const Layout = ({ children }) => (
   <>
-    <Navbar />
+    <NavBar />
     <div className=""> {children}</div>
+    <div className="block bottom-0"><Footer/></div>
   </>
 );
