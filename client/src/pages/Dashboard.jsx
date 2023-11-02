@@ -31,10 +31,10 @@ const initialForm = {
   price: "",
   location: "",
   size: "",
-  image1: "",
-  image2: "",
-  image3: "",
-  image4: "",
+  link1: "",
+  link2: "",
+  link3: "",
+  link4: "",
 };
 import PropertyForm from "../components/PropertyForm.jsx";
 import QrCode from "../components/QrCode.jsx";
@@ -154,8 +154,8 @@ const Dashboard = () => {
         </div>
         <div className="w-[85%] px-5 m-0">
           <div className="rounded-lg bg-[#212121] px-10 py-4">
-            <div className="flex justify-between items-center">
-              <p className="text-white text-xl font-bold">Total Sales</p>
+            <div className="flex items-center justify-between">
+              <p className="text-xl font-bold text-white">Total Sales</p>
               <p>
                 <div className="flex w-full">
                   <Tabs aria-label="Options">
@@ -172,13 +172,13 @@ const Dashboard = () => {
                 </div>
               </p>
             </div>
-            <div className="flex justify-between items-center text-center">
+            <div className="flex items-center justify-between text-center">
               <p className="text-[#25C07F] text-[40px] font-bold">500</p>
               <p className="text-[#25C07F] text-[20px] flex items-baseline justify-start relative">
                 54% <MdArrowUpward className="absolute bottom-[5px] left-10" />
               </p>
             </div>
-            <p className="text-white text-sm font-medium">QR SCANS OVER TIME</p>
+            <p className="text-sm font-medium text-white">QR SCANS OVER TIME</p>
             <StatisticsChart />
           </div>
           <div className="flex flex-wrap justify-between ">
