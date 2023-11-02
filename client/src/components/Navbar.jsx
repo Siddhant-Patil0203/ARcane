@@ -132,14 +132,14 @@ export default function NavBar() {
     //   });
   }, []);
   return (
-    <Navbar isBordered className=" sticky top-[0vh]">
+    <Navbar isBordered className=" ">
       <NavbarBrand className="mr-4 space-x-3">
         <img src={Logo} className=" w-9" />
         <p className="hidden font-bold sm:block text-inherit ">ARcane</p>
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" to="/">
             Buy
           </Link>
         </NavbarItem>
@@ -234,6 +234,7 @@ export default function NavBar() {
           labelPlacement="outside"
           variant="bordered"
           color="success"
+          className="w-fit"
           startContent={
             <img
               className="w-4"

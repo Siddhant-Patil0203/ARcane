@@ -60,6 +60,11 @@ const Details = () => {
             >
               <p className="text-3xl font-bold">Property Name:</p>
               <div className="mt-2 mb-5 text-3xl font-bold">
+              <div className="flex mt-2 mb-5 text-3xl font-bold ">
+                <img
+                  src="https://cdn3d.iconscout.com/3d/premium/thumb/house-5591108-4652885.png?f=webp"
+                  className="w-10 mr-3"
+                />
                 {propData?.item?.title}
               </div>
             </motion.header>
@@ -68,8 +73,11 @@ const Details = () => {
               className="ml-5 mr-5 lg:ml-14 lg:mr-0"
             >
               <motion.div {...headTextAnimation}>
-                <h1 className="mt-2 text-2xl font-bold">
-                  Location:&nbsp;
+                <h1 className="flex mt-2 text-2xl font-bold">
+                  <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/location-pin-2891358-2409769@0.png"
+                    className="w-10 mr-3 "
+                  />
                   {propData?.item?.location}
                 </h1>
               </motion.div>
@@ -83,28 +91,9 @@ const Details = () => {
               >
                 Lets Go
               </Button>
-              <Link to="/360View" state={{ item: propData }}>
-                {/* <Button
-                  className="flex w-full mt-2 lg:w-fit lg:ml-0 lg:mt-2"
-                  color="secondary"
-                  variant="shadow"
-                > */}
-                <div className="p-3 m-2 text-center bg-secondary rounded-xl w-fit">360View</div>
-                  {/* 360View */}
-                {/* </Button> */}
-              </Link>
 
-              <Card className="lg:w-[50%] mt-5 bg-opacity-40">
+              <Card className="lg:w-[100%] mt-5 bg-opacity-40">
                 <CardBody>
-                  <Image
-                    alt="Album cover"
-                    className="object-cover"
-                    height={200}
-                    shadow="md"
-                    // src=""
-                    src={propData?.item?.image}
-                    width="10%"
-                  />
                   <Chip
                     className="p-4 lg:text-xl text-xsm "
                     color={
@@ -119,6 +108,22 @@ const Details = () => {
                   <p className="mt-2 text-3xl font-extrabold">$1 LAC</p>
                 </CardBody>
               </Card>
+              <Button
+                onClick={() => {
+                  state.intro = false;
+                }}
+                className="flex w-full mt-2 lg:w-fit lg:ml-0 lg:mt-5"
+                color="secondary"
+                variant="shadow"
+                startContent={
+                  <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/vr-glasses-4035925-3342604.png"
+                    className="w-7"
+                  />
+                }
+              >
+                AR & VR View
+              </Button>
 
               {/* Property Details */}
               {/* Property details */}
