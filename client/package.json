@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bytescale/sdk": "^3.9.0",
     "@bytescale/upload-widget-react": "^4.11.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
@@ -35,6 +36,7 @@
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
+    "react-scripts": "5.0.1",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",

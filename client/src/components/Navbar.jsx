@@ -26,6 +26,13 @@ import axios from "../axios";
 import { User } from "@nextui-org/react";
 import Logo from "../assets/logo(Short).png";
 import { Link } from "react-router-dom";
+import {
+  ConnectWallet,
+  Web3Button,
+  useAddress,
+  useContract,
+  useContractRead,
+} from "@thirdweb-dev/react";
 <link
   href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
   rel="stylesheet"
@@ -126,12 +133,17 @@ export default function NavBar() {
       });
   }, []);
   return (
-    <Navbar isBordered className=" ">
+    <Navbar
+      maxWidth="2xl"
+      height="80px"
+      isBordered
+      className=" sticky top-[0vh] "
+    >
       <NavbarBrand className="mr-4 space-x-3">
         <img src={Logo} className=" w-9" />
         <p className="hidden font-bold sm:block text-inherit ">ARcane</p>
       </NavbarBrand>
-      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
+      <NavbarContent className="hidden gap-4 sm:flex" justify="end">
         <NavbarItem>
           <Link color="foreground" to="/">
             Buy
@@ -176,6 +188,9 @@ export default function NavBar() {
             }}
           />
         </NavbarItem>
+        <NavbarItem>
+          <ConnectWallet />
+        </NavbarItem>
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <NavbarItem>
@@ -206,7 +221,7 @@ export default function NavBar() {
             <DropdownItem key="logout" color="danger">
               <Button
                 onClick={logout}
-                className="flex "
+                className=" w-full"
                 color="danger"
                 variant="bordered"
                 startContent={<RiLogoutCircleLine />}
@@ -217,7 +232,7 @@ export default function NavBar() {
             <DropdownItem>
               <Button
                 onClick={deleteUser}
-                className="flex mt-3"
+                className="w-full"
                 color="danger"
                 variant="shadow"
                 startContent={<MdDeleteOutline />}
@@ -229,11 +244,12 @@ export default function NavBar() {
         </Dropdown>
         <Input
           type="location"
+          placeholder="Get Your Location"
+          className=" w-52"
           labelPlacement="outside"
           variant="bordered"
           color="success"
           // value={cityName}
-          className=""
           startContent={
             <img
               className="w-4"

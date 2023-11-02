@@ -1,41 +1,21 @@
 // import React from 'react'
 import { motion, AnimatePresence } from "framer-motion";
 import { useSnapshot } from "valtio";
-import { Button } from "@nextui-org/react";
+import { Button, Spacer } from "@nextui-org/react";
 import { Link, useLocation } from "react-router-dom";
-import { Form, Mentions, Space } from "antd";
-const { getMentions } = Mentions;
-import Reviews from "./Reviews";
 import state from "../contexts/CanvasContext";
-import { Tooltip, Card, CardBody, Image, Input } from "@nextui-org/react";
-import {
-  Web3Button,
-  useAddress,
-  useContract,
-  useContractRead,
-} from "@thirdweb-dev/react";
-import { ethers } from "ethers";
-import { HeartIcon } from "../components/HeartIcon";
-import { Layout } from "../components/Layout";
+import { Card, CardBody } from "@nextui-org/react";
+import { Web3Button, useAddress } from "@thirdweb-dev/react";
+
 import axios from "../axios";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import BottomHome from "../components/BottomHome";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
+
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 import { Chip } from "@nextui-org/react";
-import Filter from "../components/Filter";
-import { ImCalendar, ImCross, ImLocation } from "react-icons/im";
+import { FaEthereum } from "react-icons/fa";
 
 import {
   headContainerAnimation,
-  headContentAnimation,
   headTextAnimation,
   slideAnimation,
 } from "../contexts/motion";
@@ -45,6 +25,27 @@ const Details = () => {
   const location = useLocation();
   const propData = location.state;
   console.log(location);
+  const { user, setUser } = useGlobalContext();
+
+  const handlePayment = async () => {
+    const userId = user.result._id;
+    const orderId = `${userId}-${Date.now()}`;
+    const paymentData = {
+      amount: propData?.item.price || 50000,
+      orderId: orderId,
+      customerName: user.result.name,
+      customerEmail: user.result.email,
+      customerPhone: "9876543210",
+    };
+    try {
+      const res = await axios.post(`/payment`, paymentData);
+      window.location.href = res.data.paymentLink;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const address = useAddress();
 
   return (
     <AnimatePresence>
@@ -58,20 +59,20 @@ const Details = () => {
               {...slideAnimation("down")}
               className="ml-5 lg:ml-14"
             >
-              <div className="mt-2 mb-5 font-bold text-3xl flex ">
+              <div className="flex mt-2 mb-5 text-3xl font-bold ">
                 <img
                   src="https://cdn3d.iconscout.com/3d/premium/thumb/house-5591108-4652885.png?f=webp"
-                  className="mr-3 w-10"
+                  className="w-10 mr-3"
                 />
                 {propData?.item?.title}
               </div>
             </motion.header>
             <motion.div
               {...headContainerAnimation}
-              className="ml-5 lg:ml-14 mr-5 "
+              className="ml-5 mr-5 lg:ml-14 "
             >
               <motion.div {...headTextAnimation}>
-                <h1 className="mt-2 text-2xl font-bold flex">
+                <h1 className="flex mt-2 text-2xl font-bold">
                   <img
                     src="https://cdn3d.iconscout.com/3d/premium/thumb/location-pin-2891358-2409769@0.png"
                     className="w-10 mr-3 "
@@ -83,35 +84,67 @@ const Details = () => {
               <Card className="lg:w-[100%] mt-5 bg-opacity-40">
                 <CardBody>
                   <Chip
-                    className="lg:text-xl p-4 text-xsm  "
+                    className="p-4 lg:text-xl text-xsm "
                     color={
                       propData?.item?.status == "Listed" ? "success" : "primary"
                     }
                   >
                     Current Status :- {propData?.item?.status}
                   </Chip>
-                  <p className="font-bold text-xl mt-5">Description</p>
+                  <p className="mt-5 text-xl font-bold">Description</p>
                   <div>{propData?.item?.description}</div>
-                  <p className="font-bold text-xl mt-5">Price</p>
-                  <p className="font-extrabold text-3xl mt-2">$1 LAC</p>
+                  <p className="mt-5 text-xl font-bold">Price</p>
+                  <p className="mt-2 text-3xl font-extrabold">$1 LAC</p>
                 </CardBody>
               </Card>
-              <Button
-                onClick={() => {
-                  state.intro = false;
-                }}
-                className="flex mt-2 w-full lg:w-fit lg:ml-0 lg:mt-5"
-                color="secondary"
-                variant="shadow"
-                startContent={
-                  <img
-                    src="https://cdn3d.iconscout.com/3d/premium/thumb/vr-glasses-4035925-3342604.png"
-                    className="w-7"
-                  />
-                }
-              >
-                AR & VR View
-              </Button>
+              <div className="flex items-center my-4 ">
+                <Button
+                  onClick={() => {
+                    state.intro = false;
+                  }}
+                  className="flex w-full lg:w-fit lg:ml-0 py-6"
+                  color="secondary"
+                  variant="shadow"
+                  startContent={
+                    <img
+                      src="https://cdn3d.iconscout.com/3d/premium/thumb/vr-glasses-4035925-3342604.png"
+                      className="w-7"
+                    />
+                  }
+                >
+                  AR & VR View
+                </Button>
+                <Spacer x={2} />
+                <Link to="/360View">
+                  <div className="p-3 text-center rounded-xl bg-secondary w-fit">
+                    360 View
+                  </div>
+                </Link>
+              </div>
+              <div className="flex">
+                <Button
+                  color="primary"
+                  variant="shadow"
+                  className="p-6"
+                  onClick={handlePayment}
+                >
+                  Buy now
+                </Button>
+                <Spacer x={2} />
+                <Web3Button
+                  contractAddress="0x7F92b6D61f269f977558AC55F03Ea5C632095a01"
+                  action={(contract) => {
+                    contract.call("createTransaction", [
+                      address,
+                      12,
+                      3000000000000000,
+                    ]);
+                  }}
+                >
+                  Buy with ETH
+                  <FaEthereum />
+                </Web3Button>
+              </div>
 
               {/* Property Details */}
               {/* Property details */}

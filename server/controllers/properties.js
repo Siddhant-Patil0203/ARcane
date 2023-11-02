@@ -84,7 +84,6 @@ export const addProperty = async (req, res) => {
       Link3,
       Link4,
     });
-
     res.status(200).json({
       success: true,
       message: "Property Added Sucessfully",

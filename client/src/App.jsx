@@ -11,6 +11,7 @@ import CanvasIndex from "./pages/CanvasIndex";
 import Dashboard from "./pages/Dashboard";
 import DashboardUpdate from "./pages/DashboardUpdate.jsx";
 import YourList from "./components/YourList.jsx";
+import Paranoma from "./components/Paranoma";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/dashboard/seller" element={<Dashboard />} />
           <Route path="/dashboard/seller/update" element={<DashboardUpdate />} />
           <Route path="/user/favourites" element={<YourList />} />
+          <Route path="/360View" element={<Paranoma />} />
         </Route>
 
         <Route path="/login" element={<Login />} />

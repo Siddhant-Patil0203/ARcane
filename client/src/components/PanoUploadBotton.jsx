@@ -15,15 +15,20 @@ const options = {
   },
 };
 
-const UploadBottonComp = ({ handelChange }) => (
+const images = [];
+
+const UploadBottonComp = ({ setLink }) => (
   <UploadDropzone
     options={options}
     onUpdate={({ uploadedFiles }) => {
-      console.log(uploadedFiles.map((x) => x.fileUrl).join("\n"));
+      console.log(uploadedFiles.map((x) => x.fileUrl).join("\n") === "");
     }}
-    onComplete={(files) => handelChange(files.map((x) => x.fileUrl).join("\n"))}
+    onComplete={(file) => {
+      console.log(images);
+      setLink(file.map((x) => x.fileUrl).join("\n"));
+    }}
     width="600px"
-    height="305px"
+    height="205px"
   />
 );
 
