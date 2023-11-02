@@ -31,23 +31,19 @@ const sortOptions = [
   { name: "Price: High to Low", href: "#", current: false },
 ];
 const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
+  { name: "Rent House", href: "#" },
+  { name: "4BHK", href: "#" },
+  { name: "One-Day Rent", href: "#" },
 ];
 const filters = [
   {
-    id: "color",
-    name: "Color",
+    id: "furnishing",
+    name: "Furnishing",
     options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
+      { value: "white marble", label: "White Marble", checked: false },
+      { value: "beige metal", label: "Beige Metal", checked: false },
+      { value: "blue checked", label: "Blue Checked", checked: true },
+      { value: "wood", label: "Wood", checked: false },
     ],
   },
   {
@@ -65,12 +61,12 @@ const filters = [
     id: "size",
     name: "Size",
     options: [
-      { value: "2l", label: "2L", checked: false },
-      { value: "6l", label: "6L", checked: false },
-      { value: "12l", label: "12L", checked: false },
-      { value: "18l", label: "18L", checked: false },
-      { value: "20l", label: "20L", checked: false },
-      { value: "40l", label: "40L", checked: true },
+      { value: "2BHK", label: "2BHK", checked: false },
+      { value: "3BHK", label: "3BHK", checked: false },
+      { value: "1BHK", label: "1BHK", checked: false },
+      { value: "4BHK", label: "4BHK", checked: false },
+      { value: "4B2Hk", label: "4B2Hk", checked: false },
+      { value: "Rent House", label: "Rent House", checked: true },
     ],
   },
 ];

@@ -28,6 +28,7 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 import { Chip } from "@nextui-org/react";
 import Filter from "../components/Filter";
@@ -45,6 +46,25 @@ const Details = () => {
   const location = useLocation();
   const propData = location.state;
   console.log(location);
+  const { user, setUser } = useGlobalContext();
+
+  const handlePayment = async () => {
+    const userId = user.result._id;
+    const orderId = `${userId}-${Date.now()}`;
+    const paymentData = {
+      amount: propData?.item.price || 50000,
+      orderId: orderId,
+      customerName: user.result.name,
+      customerEmail: user.result.email,
+      customerPhone: "9876543210",
+    };
+    try {
+      const res = await axios.post(`/payment`, paymentData);
+      window.location.href = res.data.paymentLink;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -58,57 +78,68 @@ const Details = () => {
               {...slideAnimation("down")}
               className="ml-5 lg:ml-14"
             >
-              <p className="font-bold text-3xl">Property Name:</p>
-              <div className="mt-2 mb-5 font-bold text-3xl">
+              <div className="flex mt-2 mb-5 text-3xl font-bold ">
+                <img
+                  src="https://cdn3d.iconscout.com/3d/premium/thumb/house-5591108-4652885.png?f=webp"
+                  className="w-10 mr-3"
+                />
                 {propData?.item?.title}
               </div>
             </motion.header>
             <motion.div
               {...headContainerAnimation}
-              className="ml-5 lg:ml-14 mr-5 lg:mr-0"
+              className="ml-5 mr-5 lg:ml-14 "
             >
               <motion.div {...headTextAnimation}>
-                <h1 className="mt-2 text-2xl font-bold">
-                  Location:&nbsp;
+                <h1 className="flex mt-2 text-2xl font-bold">
+                  <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/location-pin-2891358-2409769@0.png"
+                    className="w-10 mr-3 "
+                  />
                   {propData?.item?.location}
                 </h1>
               </motion.div>
-              <Button
-                onClick={() => {
-                  state.intro = false;
-                }}
-                className="flex mt-2 w-full lg:w-fit lg:ml-0 lg:mt-2"
-                color="secondary"
-                variant="shadow"
-              >
-                Lets Go
-              </Button>
 
-              <Card className="lg:w-[50%] mt-5 bg-opacity-40">
+              <Card className="lg:w-[100%] mt-5 bg-opacity-40">
                 <CardBody>
-                  <Image
-                    alt="Album cover"
-                    className="object-cover"
-                    height={200}
-                    shadow="md"
-                    // src=""
-                    src={propData?.item?.image}
-                    width="10%"
-                  />
                   <Chip
-                    className="lg:text-xl p-4 text-xsm  "
+                    className="p-4 lg:text-xl text-xsm "
                     color={
                       propData?.item?.status == "Listed" ? "success" : "primary"
                     }
                   >
                     Current Status :- {propData?.item?.status}
                   </Chip>
-                  <p className="font-bold text-xl mt-5">Description</p>
+                  <p className="mt-5 text-xl font-bold">Description</p>
                   <div>{propData?.item?.description}</div>
-                  <p className="font-bold text-xl mt-5">Price</p>
-                  <p className="font-extrabold text-3xl mt-2">$1 LAC</p>
+                  <p className="mt-5 text-xl font-bold">Price</p>
+                  <p className="mt-2 text-3xl font-extrabold">$1 LAC</p>
                 </CardBody>
               </Card>
+              <Button
+                onClick={() => {
+                  state.intro = false;
+                }}
+                className="flex w-full mt-2 lg:w-fit lg:ml-0 lg:mt-5"
+                color="secondary"
+                variant="shadow"
+                startContent={
+                  <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/vr-glasses-4035925-3342604.png"
+                    className="w-7"
+                  />
+                }
+              >
+                AR & VR View
+              </Button>
+              <Link to="/360View">
+                <div className="p-3 my-2 text-center rounded-xl bg-secondary w-fit">360 View</div>
+              </Link>
+              <Button color="primary"
+                variant="shadow"
+                onClick={handlePayment}>
+                  Buy now 
+              </Button>
 
               {/* Property Details */}
               {/* Property details */}

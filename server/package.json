@@ -12,6 +12,7 @@
   "author": "Siddhant Patil",
   "license": "ISC",
   "dependencies": {
+    "@cashfreepayments/cashfree-sdk": "^0.1.7",
     "antd": "^5.10.3",
     "axios": "^1.6.0",
     "bcrypt": "^5.1.1",
