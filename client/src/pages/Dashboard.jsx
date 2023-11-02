@@ -139,7 +139,7 @@ const Dashboard = () => {
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
-          <QrCode />
+          <QrCode link={"https://arcane-delta.vercel.app/details"} />
           <Spacer y={2} />
           <PropertyForm
             form={form}

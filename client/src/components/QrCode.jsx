@@ -14,10 +14,10 @@ const downloadQRCode = () => {
     document.body.removeChild(a);
   }
 };
-const QrCode = () => (
+const QrCode = ({ link }) => (
   <div id="myqrcode" className="flex flex-col justify-center items-center">
     <QRCode
-      value="https://ant.design/"
+      value={link}
       bgColor="#fff"
       size={250}
       style={{
