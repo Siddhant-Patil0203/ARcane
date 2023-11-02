@@ -24,6 +24,18 @@ const propertySchema = new mongoose.Schema({
         type:String,
         default:"Listed",
     },
+    Link1:{
+        type:String,
+    },
+    Link2:{
+        type:String,
+    },
+    Link3:{
+        type:String,
+    },
+    Link4:{
+        type:String,
+    },
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Users",
