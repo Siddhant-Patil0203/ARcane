@@ -139,7 +139,7 @@ export default function NavBar() {
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" to="/">
             Buy
           </Link>
         </NavbarItem>
@@ -234,7 +234,7 @@ export default function NavBar() {
           labelPlacement="outside"
           variant="bordered"
           color="success"
-          className=""
+          className="w-fit"
           startContent={
             <img
               className="w-4"

@@ -6,11 +6,12 @@ const state = proxy({
   start: true,
   kitchen: false,
   living: false,
-  wood: true,
+  wood: false,
   granite: false,
-  white: false,
+  white: true,
   aiTexture: false,
-  aiTextureURL:"https://pbxt.replicate.delivery/WVxHg12oCy75Dhh78TteyS8CeDrZi0fMiMOGc52XMIvTYZmjA/out-0.png",
+  aiTextureURL:
+    "https://pbxt.replicate.delivery/WVxHg12oCy75Dhh78TteyS8CeDrZi0fMiMOGc52XMIvTYZmjA/out-0.png",
 });
 
 export default state;

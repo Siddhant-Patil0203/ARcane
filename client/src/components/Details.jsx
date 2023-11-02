@@ -58,8 +58,8 @@ const Details = () => {
               {...slideAnimation("down")}
               className="ml-5 lg:ml-14"
             >
-              <p className="font-bold text-3xl">Property Name:</p>
-              <div className="mt-2 mb-5 font-bold text-3xl">
+              <div className="mt-2 mb-5 font-bold text-3xl flex ">
+                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/house-5591108-4652885.png?f=webp" className="mr-3 w-10"/>
                 {propData?.item?.title}
               </div>
             </motion.header>
@@ -68,8 +68,11 @@ const Details = () => {
               className="ml-5 lg:ml-14 mr-5 lg:mr-0"
             >
               <motion.div {...headTextAnimation}>
-                <h1 className="mt-2 text-2xl font-bold">
-                  Location:&nbsp;
+                <h1 className="mt-2 text-2xl font-bold flex">
+                  <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/location-pin-2891358-2409769@0.png"
+                    className="w-10 mr-3 "
+                  />
                   {propData?.item?.location}
                 </h1>
               </motion.div>
@@ -80,8 +83,11 @@ const Details = () => {
                 className="flex mt-2 w-full lg:w-fit lg:ml-0 lg:mt-2"
                 color="secondary"
                 variant="shadow"
+                startContent={
+                  <img src="https://cdn3d.iconscout.com/3d/premium/thumb/vr-glasses-4035925-3342604.png" className="w-7"/>
+                }
               >
-                Lets Go
+                AR & VR View
               </Button>
 
               <Card className="lg:w-[50%] mt-5 bg-opacity-40">

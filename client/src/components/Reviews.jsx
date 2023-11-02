@@ -1,13 +1,14 @@
 // import React from 'react'
 import { motion, AnimatePresence } from "framer-motion";
 import { useSnapshot } from "valtio";
-import { Button } from "@nextui-org/react";
+import { Textarea, Button, Input } from "@nextui-org/react";
 import { Link, useLocation } from "react-router-dom";
-import {  Form, Mentions, Space } from "antd";
+import { Form, Mentions, Space } from "antd";
 const { getMentions } = Mentions;
-import {Divider} from "@nextui-org/react";
+import { Divider } from "@nextui-org/react";    
 
 import state from "../contexts/CanvasContext";
+import {Card, CardHeader, CardBody, CardFooter, Avatar} from "@nextui-org/react";
 
 import { Layout } from "./Layout";
 import {
@@ -42,98 +43,56 @@ const Reviews = () => {
     }
   };
   return (
-    <Form form={form} layout="horizontal" onFinish={onFinish}>
-        <p className="mt-10 ml-36 font-bold text-2xl dark:text-white">Reviews & Ratings</p>
+    <div className="container m-5 p-10 justify-center mx-auto h-fit">
+      <p className="font-bold text-xl mb-10">Reviews & Comments</p>
 
-        <p className="mt-10 ml-[30%] font-bold text-lg dark:text-white">Add Your Comment</p>
- 
-      <Form.Item
-        name="title"
-        label="Title"
-        className="mt-5 dark:text-white"
-        labelCol={{
-          span: 6,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        rules={[
-          {
-            validator: checkMention,
-          },
-        ]}
-      >
-        <Mentions
-       
-          rows={1}
-          options={[
-            {
-              value: "afc163",
-              label: "afc163",
-            },
-            {
-              value: "zombieJ",
-              label: "zombieJ",
-            },
-            {
-              value: "yesmeck",
-              label: "yesmeck",
-            },
-          ]}
-        />
-      </Form.Item>
-      <Form.Item
-        name="description"
-        label="Description"
-        labelCol={{
-          span: 6,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Mentions
-        className=""
-          rows={3}
-          placeholder="You can use @ to ref user here"
-          options={[
-            {
-              value: "afc163",
-              label: "afc163",
-            },
-            {
-              value: "zombieJ",
-              label: "zombieJ",
-            },
-            {
-              value: "yesmeck",
-              label: "yesmeck",
-            },
-          ]}
-        />
-      </Form.Item>
-      <Form.Item
-        wrapperCol={{
-          span: 14,
-          offset: 6,
-        }}
-      >
-        <Space wrap>
-          <Button htmlType="submit" type="primary">
-            Submit
-          </Button>
-          <Button htmlType="button" onClick={onReset}>
-            Reset
-          </Button>
-        </Space>
-      </Form.Item>
+      <Input  label="Add Your Comment" className="lg:w-1/2 my-3"></Input>
+      <Textarea
+        
+        labelPlacement="outside"
+        placeholder="Enter your comment description"
+        className="w-full lg:w-[50%]"
+        minRows={4}
+      />
+       <Button color="primary" variant="solid" className="mr-3 mt-3">
+        Submit
+      </Button>
+      <Button color="danger" variant="bordered" >
+        Reset
+      </Button>
       <Divider className="my-4" />
-    </Form>
+      <p className="font-bold text-xl mb-10">Buyer's Review</p>
+      <Card className="max-w-[340px]">
+      <CardHeader className="justify-between">
+        <div className="flex gap-5">
+          <Avatar isBordered radius="full" size="md" src="/avatars/avatar-1.png" />
+          <div className="flex flex-col gap-1 items-start justify-center">
+            <h4 className="text-small font-semibold leading-none text-default-600">Zoey Lang</h4>
+            <h5 className="text-small tracking-tight text-default-400">@zoeylang</h5>
+          </div>
+        </div>
+     
+      </CardHeader>
+      <CardBody className="px-3 py-0 text-small text-default-400">
+        <p>
+          Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
+        </p>
+        <span className="pt-2">
+          #FrontendWithZoey 
+          <span className="py-2" aria-label="computer" role="img">
+            💻
+          </span>
+        </span>
+      </CardBody>
+      <CardFooter className="gap-3">
+        <div className="flex gap-1">
+          <p className="font-semibold text-default-400 text-small">4</p>
+          <p className=" text-default-400 text-small">Likes</p>
+        </div>
+      
+      </CardFooter>
+    </Card>
+    </div>
   );
 };
 
