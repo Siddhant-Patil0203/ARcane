@@ -227,9 +227,7 @@ const Home = () => {
                     </div>
                   </CardBody>
                 </Card>
-              ) : (
-                <></>
-              )}
+              ) : null}
             </div>
           );
         })}
