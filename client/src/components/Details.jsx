@@ -28,6 +28,7 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 import { Chip } from "@nextui-org/react";
 import Filter from "../components/Filter";
@@ -45,6 +46,25 @@ const Details = () => {
   const location = useLocation();
   const propData = location.state;
   console.log(location);
+  const { user, setUser } = useGlobalContext();
+
+  const handlePayment = async () => {
+    const userId = user.result._id;
+    const orderId = `${userId}-${Date.now()}`;
+    const paymentData = {
+      amount: propData?.item.price || 50000,
+      orderId: orderId,
+      customerName: user.result.name,
+      customerEmail: user.result.email,
+      customerPhone: "9876543210",
+    };
+    try {
+      const res = await axios.post(`/payment`, paymentData);
+      window.location.href = res.data.paymentLink;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -58,8 +78,6 @@ const Details = () => {
               {...slideAnimation("down")}
               className="ml-5 lg:ml-14"
             >
-              <p className="text-3xl font-bold">Property Name:</p>
-              <div className="mt-2 mb-5 text-3xl font-bold">
               <div className="flex mt-2 mb-5 text-3xl font-bold ">
                 <img
                   src="https://cdn3d.iconscout.com/3d/premium/thumb/house-5591108-4652885.png?f=webp"
@@ -70,7 +88,7 @@ const Details = () => {
             </motion.header>
             <motion.div
               {...headContainerAnimation}
-              className="ml-5 mr-5 lg:ml-14 lg:mr-0"
+              className="ml-5 mr-5 lg:ml-14 "
             >
               <motion.div {...headTextAnimation}>
                 <h1 className="flex mt-2 text-2xl font-bold">
@@ -81,16 +99,6 @@ const Details = () => {
                   {propData?.item?.location}
                 </h1>
               </motion.div>
-              <Button
-                onClick={() => {
-                  state.intro = false;
-                }}
-                className="flex w-full mt-2 lg:w-fit lg:ml-0 lg:mt-2"
-                color="secondary"
-                variant="shadow"
-              >
-                Lets Go
-              </Button>
 
               <Card className="lg:w-[100%] mt-5 bg-opacity-40">
                 <CardBody>
@@ -123,6 +131,14 @@ const Details = () => {
                 }
               >
                 AR & VR View
+              </Button>
+              <Link to="/360View">
+                <div className="p-3 my-2 text-center rounded-xl bg-secondary w-fit">360 View</div>
+              </Link>
+              <Button color="primary"
+                variant="shadow"
+                onClick={handlePayment}>
+                  Buy now 
               </Button>
 
               {/* Property Details */}

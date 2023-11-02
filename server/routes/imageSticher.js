@@ -1,10 +1,10 @@
 import express from "express";
-import {addLinks , getLinks} from "../controllers/ImgSticher.js";
+import {addLinks , getLinks} from "../controllers/ImageSticher.js";
 const router = express.Router();
 
 router.get("/get/:id",getLinks);
 router.post("/add",addLinks);
-router.get("/op",(res,res)=>{
+router.get("/op",(req, res)=>{
     res.send("working");
 })
 
