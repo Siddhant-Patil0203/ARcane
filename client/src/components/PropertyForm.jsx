@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import {
   Input,
   Textarea,
@@ -9,9 +9,12 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
+  Spacer,
 } from "@nextui-org/react";
 import { ImHome } from "react-icons/im";
 import UploadBottonComp from "./UploadBottonComp";
+import PanoUploadBotton from "./PanoUploadBotton";
+import { Md360 } from "react-icons/md";
 
 export default function PropertyForm({
   form,
@@ -20,12 +23,11 @@ export default function PropertyForm({
   isLoading,
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [imgLink, setImgLink] = useState("");
+  const [imgLink, setImgLink] = useState();
+  const [paranomaLink, setParanomaLink] = useState();
 
-  useEffect(() => {
-    console.log(imgLink);
-    handleChange({ target: { name: "image", value: imgLink } });
-  }, [imgLink]);
+  console.log(imgLink);
+  console.log(paranomaLink);
 
   return (
     <>
@@ -37,6 +39,8 @@ export default function PropertyForm({
         <ModalContent>
           {(onClose) => (
             <>
+              <Spacer y={550} />
+              <ModalHeader>Add New Property</ModalHeader>
               <ModalBody>
                 <div>
                   <form>
@@ -61,25 +65,30 @@ export default function PropertyForm({
                       onChange={handleChange}
                       className="mt-3"
                     />
-
+                    <h1 className="text-xl font-bold">Upload Image</h1>
                     {imgLink ? (
                       <div className="flex flex-col w-full justify-center">
-                        <img
-                          src={imgLink}
-                          alt="img"
-                          width={100}
-                          className="
+                        {imgLink.map((img) => (
+                          <img
+                            src={img}
+                            alt="img"
+                            width={100}
+                            className="
                         object-cover
                         rounded-lg
                         m-2
                         "
-                        />
-                        <Button color="danger" onClick={() => setImgLink("")}>
+                          />
+                        ))}
+                        <Button color="danger" onClick={() => setImgLink()}>
                           Delete
                         </Button>
                       </div>
                     ) : (
-                      <UploadBottonComp setImgLink={setImgLink} />
+                      <UploadBottonComp
+                        handelChange={setImgLink}
+                        data={imgLink}
+                      />
                     )}
                     <Input
                       type="text"
@@ -112,8 +121,47 @@ export default function PropertyForm({
                       onChange={handleChange}
                       isRequired
                       variant="underlined"
-                      className="mt-3"
-                    />  
+                      className="mt-3 mb-3"
+                    />
+                    <h1 className="text-xl font-bold flex">
+                      Create 360
+                      <Md360 size={25} className="ml-2" />
+                    </h1>
+                    <p className="text-sm text-gray-500">
+                      Upload 4 images to create 360 view
+                    </p>
+                    {paranomaLink ? (
+                      <div className="flex flex-col w-full justify-center">
+                        {paranomaLink.map(
+                          (img) => (
+                            console.log(img),
+                            (
+                              <img
+                                src={img}
+                                alt="img"
+                                width={100}
+                                className="
+                        object-cover
+                        rounded-lg
+                        m-2
+                        "
+                              />
+                            )
+                          )
+                        )}
+                        <Button
+                          color="danger"
+                          onClick={() => setParanomaLink()}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    ) : (
+                      <PanoUploadBotton
+                        handelChange={setParanomaLink}
+                        data={paranomaLink}
+                      />
+                    )}
                   </form>
                 </div>
               </ModalBody>

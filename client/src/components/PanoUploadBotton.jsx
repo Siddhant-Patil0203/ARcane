@@ -17,7 +17,7 @@ const options = {
 
 const images = [];
 
-const UploadBottonComp = ({ handelChange, data }) => (
+const PanoUploadBotton = ({ handelChange, data }) => (
   <UploadDropzone
     options={options}
     onUpdate={({ uploadedFiles }) => {
@@ -42,4 +42,4 @@ const UploadBottonComp = ({ handelChange, data }) => (
   />
 );
 
-export default UploadBottonComp;
+export default PanoUploadBotton;

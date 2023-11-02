@@ -31,6 +31,10 @@ const initialForm = {
   price: "",
   location: "",
   size: "",
+  image1: "",
+  image2: "",
+  image3: "",
+  image4: "",
 };
 import PropertyForm from "../components/PropertyForm.jsx";
 import QrCode from "../components/QrCode.jsx";
