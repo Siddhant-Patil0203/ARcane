@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
 
 router.post("/response", async (req, res) => {
   const data = req.body;
- 
+  console.log(data);
   res.redirect(process.env.CLIENT_URL + "/");
   
 });
