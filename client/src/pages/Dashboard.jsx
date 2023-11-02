@@ -31,10 +31,10 @@ const initialForm = {
   price: "",
   location: "",
   size: "",
-  image1: "",
-  image2: "",
-  image3: "",
-  image4: "",
+  link1: "",
+  link2: "",
+  link3: "",
+  link4: "",
 };
 import PropertyForm from "../components/PropertyForm.jsx";
 import QrCode from "../components/QrCode.jsx";
@@ -46,7 +46,6 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState(initialForm);
   const [propertyList, setPropertyList] = useState();
-  const navigateTo = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -57,7 +56,6 @@ const Dashboard = () => {
     setIsLoading(true);
 
     try {
-      console.log(form);
       const res = await axios.post("/api/v1/properties/Add", form);
       const result = res.data;
       console.log(result);
@@ -73,7 +71,7 @@ const Dashboard = () => {
     setIsLoading(true);
 
     try {
-      // console.log(form);
+      console.log(form);
       const res = await axios.delete(`/api/v1/properties/delete/${id}`);
       const result = res.data;
       console.log(result);
@@ -104,10 +102,10 @@ const Dashboard = () => {
       try {
         const res = await axios.get("/api/v1/properties/fetch/user");
         setPropertyList(res.data);
-        console.log(res.data);
+        // console.log(res.data);
         // setIsLoading(false);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
         // setIsLoading(false);
       }
     };

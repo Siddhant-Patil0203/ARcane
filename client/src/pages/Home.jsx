@@ -11,16 +11,6 @@ import { ethers } from "ethers";
 import { HeartIcon } from "../components/HeartIcon";
 import { Layout } from "../components/Layout";
 import axios from "../axios";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-// import BottomHome from "../components/BottomHome";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
 import { Chip } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import Filter from "../components/Filter";

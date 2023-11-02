@@ -6,7 +6,7 @@ import { UploadDropzone } from "@bytescale/upload-widget-react";
 // -----
 const options = {
   apiKey: "secret_kW15bkg3tQzmNBALef9V3NjPN8sn", // This is your API key.
-  maxFileCount: 5,
+  maxFileCount: 1,
   showFinishButton: true, // Note: You must use 'onUpdate' if you set 'showFinishButton: false' (default).
   styles: {
     colors: {
@@ -17,29 +17,19 @@ const options = {
 
 const images = [];
 
-const PanoUploadBotton = ({ handelChange, data }) => (
+const UploadBottonComp = ({ setLink }) => (
   <UploadDropzone
     options={options}
     onUpdate={({ uploadedFiles }) => {
       console.log(uploadedFiles.map((x) => x.fileUrl).join("\n") === "");
-
-      if (
-        uploadedFiles.map((x) => x.fileUrl).join("\n") !== "" &&
-        images.indexOf(uploadedFiles.map((x) => x.fileUrl).join("\n")) === -1
-      ) {
-        images.push(uploadedFiles.map((x) => x.fileUrl).join("\n"));
-      }
     }}
-    onComplete={() => {
+    onComplete={(file) => {
       console.log(images);
-      handelChange(images);
-      if (data.length > 0) {
-        images.length = 0;
-      }
+      setLink(file.map((x) => x.fileUrl).join("\n"));
     }}
     width="600px"
-    height="305px"
+    height="205px"
   />
 );
 
-export default PanoUploadBotton;
+export default UploadBottonComp;
