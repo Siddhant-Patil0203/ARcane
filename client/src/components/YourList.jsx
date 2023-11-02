@@ -108,10 +108,10 @@ const YourList = () => {
       {propertyList?.fetchProp?.map((item, index) => {
         console.log(item);
         return (
-          <div className="flex m-5" key={index}>
+          <div className="flex flex-row m-5" key={index}>
             <Card
               isFooterBlurred
-              className="w-[300px] h-[300px] col-span-12 sm:col-span-7"
+              className="w-[300px] h-[300px] "
             >
               <CardHeader className="absolute z-10 flex-col items-start top-1">
                 <p className="font-bold uppercase text-tiny text-white/60">
