@@ -65,11 +65,13 @@ const Configurator = () => {
               color="danger"
               variant="ghost"
               startContent={
-                <img src="https://icons.veryicon.com/png/o/miscellaneous/eva-icon-fill/arrow-back-8.png" className="w-5"/>
-               
+                <img
+                  src="https://icons.veryicon.com/png/o/miscellaneous/eva-icon-fill/arrow-back-8.png"
+                  className="w-5"
+                />
               }
             >
-               <p className="hidden lg:block ">Back</p>
+              <p className="hidden lg:block ">Back</p>
             </Button>
 
             {snap.start ? (
@@ -119,12 +121,7 @@ const Configurator = () => {
                   className="flex w-fit lg:w-full m-2"
                   color="primary"
                   variant="shadow"
-                  startContent={
-                    <img
-                      className="w-10"
-                      src={Wood}
-                    />
-                  }
+                  startContent={<img className="w-10" src={Wood} />}
                 >
                   <p className="hidden lg:block ">Wood</p>
                 </Button>
@@ -137,14 +134,9 @@ const Configurator = () => {
                   className="flex w-fit  lg:w-full m-2"
                   color="primary"
                   variant="shadow"
-                  startContent={
-                    <img
-                      className="w-10"
-                      src={White}
-                    />
-                  }
+                  startContent={<img className="w-10" src={White} />}
                 >
-                   <p className="hidden lg:block ">White</p>
+                  <p className="hidden lg:block ">White</p>
                 </Button>
                 <Textarea
                   label="AI texture"
@@ -162,12 +154,17 @@ const Configurator = () => {
                   color="warning"
                   variant="shadow"
                   isLoading={isLoading}
-                  disabled
                   startContent={
-                    <img src="https://cdn-icons-png.flaticon.com/512/3106/3106856.png" className=" w-8"/>
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/3106/3106856.png"
+                      className=" w-8"
+                    />
                   }
+                  // disabled
                 >
-                   <p className="hidden lg:block ">{isLoading ? "Generating Texture..." : "Send"}</p>
+                  <p className="hidden lg:block ">
+                    {isLoading ? "Generating Texture..." : "Send"}
+                  </p>
                 </Button>
               </div>
             ) : (
