@@ -22,27 +22,28 @@ export default function PropertyForm({
   handleChange,
   handleSumbmit,
   isLoading,
+  text = "Add New Property",
+  width = "w-[200px]",
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [imgLink, setImgLink] = useState();
   const [paranomaLink, setParanomaLink] = useState();
-  const [thereedModelLink, setthereedModelLink] = useState();
 
   console.log(imgLink);
   console.log(paranomaLink);
 
   return (
     <>
-      <Button onPress={onOpen} className="mt-4 w-[200px]">
-        Add New Property
-        <ImHome />
+      <Button onPress={onOpen} className={` ${width}`}>
+        {text}
+        {text === "Add New Property" ? <ImHome /> : null}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <Spacer y={750} />
-              <ModalHeader>Add New Property</ModalHeader>
+              <ModalHeader>{Text}</ModalHeader>
               <ModalBody>
                 <div>
                   <form>

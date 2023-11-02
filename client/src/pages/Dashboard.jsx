@@ -142,6 +142,7 @@ const Dashboard = () => {
             </DropdownMenu>
           </Dropdown>
           <QrCode />
+          <Spacer y={2} />
           <PropertyForm
             form={form}
             handleChange={handleChange}
@@ -220,6 +221,8 @@ const Dashboard = () => {
                           </p>
                         </div>
                       </div>
+
+                      <Spacer x={1} />
                       <Button
                         color="danger"
                         radius="full"
@@ -234,10 +237,15 @@ const Dashboard = () => {
                       >
                         Delete Property
                       </Button>
-
-                      <Button color="primary" radius="full" size="sm">
-                        Update
-                      </Button>
+                      <Spacer x={1} />
+                      <PropertyForm
+                        form={form}
+                        handleChange={handleChange}
+                        handleSumbmit={handleSumbmit}
+                        isLoading={isLoading}
+                        text={"edit"}
+                        width="w-[40px]"
+                      />
                     </CardFooter>
                   </Card>
                 </div>

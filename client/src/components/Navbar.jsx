@@ -1,15 +1,12 @@
 import React from "react";
 import { useTheme } from "next-themes";
 
-
-
 import {
   Navbar,
   Switch,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-
   Input,
   Button,
   DropdownItem,
@@ -29,7 +26,13 @@ import axios from "../axios";
 import { User } from "@nextui-org/react";
 import Logo from "../assets/logo(Short).png";
 import { Link } from "react-router-dom";
-
+import {
+  ConnectWallet,
+  Web3Button,
+  useAddress,
+  useContract,
+  useContractRead,
+} from "@thirdweb-dev/react";
 
 export default function NavBar() {
   const MapboxAPIKey =
@@ -132,12 +135,17 @@ export default function NavBar() {
     //   });
   }, []);
   return (
-    <Navbar isBordered className=" sticky top-[0vh]">
+    <Navbar
+      maxWidth="2xl"
+      height="80px"
+      isBordered
+      className=" sticky top-[0vh]"
+    >
       <NavbarBrand className="mr-4 space-x-3">
         <img src={Logo} className=" w-9" />
         <p className="hidden font-bold sm:block text-inherit ">ARcane</p>
       </NavbarBrand>
-      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
+      <NavbarContent className="hidden gap-4 sm:flex" justify="end">
         <NavbarItem>
           <Link color="foreground" href="#">
             Buy
@@ -182,6 +190,9 @@ export default function NavBar() {
             }}
           />
         </NavbarItem>
+        <NavbarItem>
+          <ConnectWallet />
+        </NavbarItem>
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <NavbarItem>
@@ -201,13 +212,18 @@ export default function NavBar() {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{user.result.email}</p>
             </DropdownItem>
-            <DropdownItem key="settings"><Link to="/dashboard/seller">My Dashboard</Link></DropdownItem>
-            <DropdownItem key="configurations"> <Link to="/user/favourites">Favourites</Link></DropdownItem>
+            <DropdownItem key="settings">
+              <Link to="/dashboard/seller">My Dashboard</Link>
+            </DropdownItem>
+            <DropdownItem key="configurations">
+              {" "}
+              <Link to="/user/favourites">Favourites</Link>
+            </DropdownItem>
             <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
             <DropdownItem key="logout" color="danger">
               <Button
                 onClick={logout}
-                className="flex "
+                className=" w-full"
                 color="danger"
                 variant="bordered"
                 startContent={<RiLogoutCircleLine />}
@@ -218,12 +234,12 @@ export default function NavBar() {
             <DropdownItem>
               <Button
                 onClick={deleteUser}
-                className="flex mt-3"
+                className="w-full"
                 color="danger"
                 variant="shadow"
                 startContent={<MdDeleteOutline />}
               >
-               Delete Account
+                Delete Account
               </Button>
             </DropdownItem>
           </DropdownMenu>
@@ -231,6 +247,7 @@ export default function NavBar() {
         <Input
           type="location"
           placeholder="Get Your Location"
+          className=" w-52"
           labelPlacement="outside"
           variant="bordered"
           color="success"
@@ -241,7 +258,6 @@ export default function NavBar() {
             />
           }
         />
-              
       </NavbarContent>
     </Navbar>
   );
