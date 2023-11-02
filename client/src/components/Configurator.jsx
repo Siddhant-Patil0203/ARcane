@@ -5,9 +5,14 @@ import { Button, Textarea } from "@nextui-org/react";
 
 import state from "../contexts/CanvasContext";
 import axios from "../axios";
-
+// import {GrFormPreviousLink} from "react-icons/gr"
 import { fadeAnimation, slideAnimation } from "../contexts/motion";
 import { useGlobalContext } from "../contexts/GlobalContext";
+import Granite from "../assets/granite.png";
+import Kitchen from "../assets/kitchen.png";
+import Living from "../assets/living.png";
+import White from "../assets/white.png";
+import Wood from "../assets/wood.png";
 
 const initialForm = {
   prompt: "",
@@ -35,9 +40,8 @@ const Configurator = () => {
       state.wood = false;
       state.aiTexture = true;
 
-      
-      console.log(snap.aiTextureURL)
-      
+      console.log(snap.aiTextureURL);
+
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -57,11 +61,17 @@ const Configurator = () => {
               onClick={() => {
                 state.intro = true;
               }}
-              className="flex w-full m-2 "
+              className="flex w-fit lg:w-full m-2 "
               color="danger"
               variant="ghost"
+              startContent={
+                <img
+                  src="https://icons.veryicon.com/png/o/miscellaneous/eva-icon-fill/arrow-back-8.png"
+                  className="w-5"
+                />
+              }
             >
-              Back
+              <p className="hidden lg:block ">Back</p>
             </Button>
 
             {snap.start ? (
@@ -70,28 +80,24 @@ const Configurator = () => {
                   onClick={() => {
                     (state.start = false), (state.kitchen = true);
                   }}
-                  className="flex w-full m-2"
+                  className="flex w-fit lg:w-full m-2"
                   color="secondary"
                   variant="shadow"
-                  startContent={
-                    <img className="w-10" src="https://o.remove.bg/downloads/3757ab79-17df-4f06-956d-87a34211b5b6/108564669-simple-chef-hat-icon-kitchen-logo-white-icon-with-shadow-on-transparent-background-removebg-preview.png"/>
-                  }
+                  startContent={<img className="w-10" src={Kitchen} />}
                 >
-                  kitchen
+                  <p className="hidden lg:block ">Kitchen</p>
                 </Button>
                 <Button
                   onClick={() => {
                     state.start = false;
                     state.living = true;
                   }}
-                  className="flex w-full m-2"
+                  className="flex w-fit lg:w-full m-2"
                   color="default"
                   variant="shadow"
-                  startContent={
-                    <img className="w-7" src="https://o.remove.bg/downloads/82cb33f1-2891-4e4e-a6ef-b5451c984259/transparent-living-room-icon-interior-design-icon-sofa-icon-5fa62a09c04ae1.9178272616047252577876-removebg-preview.png"/>
-                  }
+                  startContent={<img className="w-7" src={Living} />}
                 >
-                  living
+                  <p className="hidden lg:block ">Living</p>
                 </Button>
                 <Button
                   onClick={() => {
@@ -99,14 +105,12 @@ const Configurator = () => {
                     state.wood = false;
                     state.white = false;
                   }}
-                  className="flex w-full m-2"
+                  className="flex w-fit lg:w-full m-2"
                   color="primary"
                   variant="shadow"
-                  startContent={
-                    <img className="w-10" src="https://o.remove.bg/downloads/1a4bf324-a16d-48f1-8c26-322e54c7396f/istockphoto-1423505904-612x612-removebg-preview.png"/>
-                  }
+                  startContent={<img className="w-10" src={Granite} />}
                 >
-                  granite
+                  <p className="hidden lg:block ">Granite</p>
                 </Button>
                 <Button
                   onClick={() => {
@@ -114,14 +118,12 @@ const Configurator = () => {
                     state.wood = true;
                     state.white = false;
                   }}
-                  className="flex w-full m-2"
+                  className="flex w-fit lg:w-full m-2"
                   color="primary"
                   variant="shadow"
-                  startContent={
-                    <img className="w-10" src="https://o.remove.bg/downloads/caae8241-2b02-44fa-ac01-a7863ffcc246/9670421ff0e6d07a338de451fe54369a-removebg-preview.png"/>
-                  }
+                  startContent={<img className="w-10" src={Wood} />}
                 >
-                  wood
+                  <p className="hidden lg:block ">Wood</p>
                 </Button>
                 <Button
                   onClick={() => {
@@ -129,14 +131,12 @@ const Configurator = () => {
                     state.wood = false;
                     state.white = true;
                   }}
-                  className="flex w-full m-2"
+                  className="flex w-fit  lg:w-full m-2"
                   color="primary"
                   variant="shadow"
-                  startContent={
-                    <img className="w-10" src="https://o.remove.bg/downloads/61fd3acd-9ec5-4972-bd17-b15c40c9b9b7/png-transparent-mosaic-tile-glass-material-solidworks-corp-new-material-miscellaneous-glass-blue-removebg-preview.png"/>
-                  }
+                  startContent={<img className="w-10" src={White} />}
                 >
-                  white
+                  <p className="hidden lg:block ">White</p>
                 </Button>
                 <Textarea
                   label="AI texture"
@@ -150,13 +150,21 @@ const Configurator = () => {
                 />
                 <Button
                   onClick={handleSumbmit}
-                  className="flex w-full m-2"
+                  className="flex w-fit lg:w-full m-2"
                   color="warning"
                   variant="shadow"
                   isLoading={isLoading}
+                  startContent={
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/3106/3106856.png"
+                      className=" w-8"
+                    />
+                  }
                   // disabled
                 >
-                  {isLoading ? 'Generating Texture...' : 'Send'}
+                  <p className="hidden lg:block ">
+                    {isLoading ? "Generating Texture..." : "Send"}
+                  </p>
                 </Button>
               </div>
             ) : (
@@ -170,7 +178,7 @@ const Configurator = () => {
                 color="danger"
                 variant="shadow"
               >
-                center
+                Center
               </Button>
             )}
           </motion.div>
