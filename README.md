@@ -44,8 +44,6 @@
 - **AI House recommendation system via collaborative filtering**
 - **QR Code tracking for real-estate newspaper advertisement with 3d AR models**
 
-### Pitch Deck : 
-You can access the PitchDeck from here [ReLive PitchDeck](https://docs.google.com/presentation/d/e/2PACX-1vSDPcjHNUJDj1WryBGcTMCmM0HV3B_QzxKVKDV5wiw1KNU0Qu9YT_UQZzJEtLfxVg-QNXCErvmuL7Cl/pub?start=true&loop=false&delayms=3000)
 
 ### 🌐 Domains  
 - **Client Side** : https://arcane-delta.vercel.app/
