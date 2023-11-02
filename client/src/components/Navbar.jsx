@@ -139,7 +139,7 @@ export default function NavBar() {
       maxWidth="2xl"
       height="80px"
       isBordered
-      className=" sticky top-[0vh]"
+      className=" sticky top-[0vh] "
     >
       <NavbarBrand className="mr-4 space-x-3">
         <img src={Logo} className=" w-9" />
@@ -251,7 +251,6 @@ export default function NavBar() {
           labelPlacement="outside"
           variant="bordered"
           color="success"
-          className="w-fit"
           startContent={
             <img
               className="w-4"

@@ -1,42 +1,21 @@
 // import React from 'react'
 import { motion, AnimatePresence } from "framer-motion";
 import { useSnapshot } from "valtio";
-import { Button } from "@nextui-org/react";
+import { Button, Spacer } from "@nextui-org/react";
 import { Link, useLocation } from "react-router-dom";
-import { Form, Mentions, Space } from "antd";
-const { getMentions } = Mentions;
-import Reviews from "./Reviews";
 import state from "../contexts/CanvasContext";
-import { Tooltip, Card, CardBody, Image, Input } from "@nextui-org/react";
-import {
-  Web3Button,
-  useAddress,
-  useContract,
-  useContractRead,
-} from "@thirdweb-dev/react";
-import { ethers } from "ethers";
-import { HeartIcon } from "../components/HeartIcon";
-import { Layout } from "../components/Layout";
+import { Card, CardBody } from "@nextui-org/react";
+import { Web3Button, useAddress } from "@thirdweb-dev/react";
+
 import axios from "../axios";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import BottomHome from "../components/BottomHome";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
+
 import { useGlobalContext } from "../contexts/GlobalContext";
 
 import { Chip } from "@nextui-org/react";
-import Filter from "../components/Filter";
-import { ImCalendar, ImCross, ImLocation } from "react-icons/im";
+import { FaEthereum } from "react-icons/fa";
 
 import {
   headContainerAnimation,
-  headContentAnimation,
   headTextAnimation,
   slideAnimation,
 } from "../contexts/motion";
@@ -65,6 +44,8 @@ const Details = () => {
       console.error(error);
     }
   };
+
+  const address = useAddress();
 
   return (
     <AnimatePresence>
@@ -116,30 +97,54 @@ const Details = () => {
                   <p className="mt-2 text-3xl font-extrabold">$1 LAC</p>
                 </CardBody>
               </Card>
-              <Button
-                onClick={() => {
-                  state.intro = false;
-                }}
-                className="flex w-full mt-2 lg:w-fit lg:ml-0 lg:mt-5"
-                color="secondary"
-                variant="shadow"
-                startContent={
-                  <img
-                    src="https://cdn3d.iconscout.com/3d/premium/thumb/vr-glasses-4035925-3342604.png"
-                    className="w-7"
-                  />
-                }
-              >
-                AR & VR View
-              </Button>
-              <Link to="/360View">
-                <div className="p-3 my-2 text-center rounded-xl bg-secondary w-fit">360 View</div>
-              </Link>
-              <Button color="primary"
-                variant="shadow"
-                onClick={handlePayment}>
-                  Buy now 
-              </Button>
+              <div className="flex items-center my-4 ">
+                <Button
+                  onClick={() => {
+                    state.intro = false;
+                  }}
+                  className="flex w-full lg:w-fit lg:ml-0 py-6"
+                  color="secondary"
+                  variant="shadow"
+                  startContent={
+                    <img
+                      src="https://cdn3d.iconscout.com/3d/premium/thumb/vr-glasses-4035925-3342604.png"
+                      className="w-7"
+                    />
+                  }
+                >
+                  AR & VR View
+                </Button>
+                <Spacer x={2} />
+                <Link to="/360View">
+                  <div className="p-3 text-center rounded-xl bg-secondary w-fit">
+                    360 View
+                  </div>
+                </Link>
+              </div>
+              <div className="flex">
+                <Button
+                  color="primary"
+                  variant="shadow"
+                  className="p-6"
+                  onClick={handlePayment}
+                >
+                  Buy now
+                </Button>
+                <Spacer x={2} />
+                <Web3Button
+                  contractAddress="0x7F92b6D61f269f977558AC55F03Ea5C632095a01"
+                  action={(contract) => {
+                    contract.call("createTransaction", [
+                      address,
+                      12,
+                      3000000000000000,
+                    ]);
+                  }}
+                >
+                  Buy with ETH
+                  <FaEthereum />
+                </Web3Button>
+              </div>
 
               {/* Property Details */}
               {/* Property details */}
