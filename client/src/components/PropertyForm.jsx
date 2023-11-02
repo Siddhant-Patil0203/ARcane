@@ -14,6 +14,7 @@ import {
 import { ImHome } from "react-icons/im";
 import UploadBottonComp from "./UploadBottonComp";
 import PanoUploadBotton from "./PanoUploadBotton";
+import Upload3dModel from "./Upload3dModel";
 import { Md360 } from "react-icons/md";
 
 export default function PropertyForm({
@@ -25,6 +26,7 @@ export default function PropertyForm({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [imgLink, setImgLink] = useState();
   const [paranomaLink, setParanomaLink] = useState();
+  const [thereedModelLink, setthereedModelLink] = useState();
 
   console.log(imgLink);
   console.log(paranomaLink);
@@ -39,7 +41,7 @@ export default function PropertyForm({
         <ModalContent>
           {(onClose) => (
             <>
-              <Spacer y={550} />
+              <Spacer y={750} />
               <ModalHeader>Add New Property</ModalHeader>
               <ModalBody>
                 <div>
@@ -68,27 +70,22 @@ export default function PropertyForm({
                     <h1 className="text-xl font-bold">Upload Image</h1>
                     {imgLink ? (
                       <div className="flex flex-col w-full justify-center">
-                        {imgLink.map((img) => (
-                          <img
-                            src={img}
-                            alt="img"
-                            width={100}
-                            className="
+                        <img
+                          src={imgLink}
+                          alt="img"
+                          width={100}
+                          className="
                         object-cover
                         rounded-lg
                         m-2
                         "
-                          />
-                        ))}
+                        />
                         <Button color="danger" onClick={() => setImgLink()}>
                           Delete
                         </Button>
                       </div>
                     ) : (
-                      <UploadBottonComp
-                        handelChange={setImgLink}
-                        data={imgLink}
-                      />
+                      <UploadBottonComp handelChange={setImgLink} />
                     )}
                     <Input
                       type="text"
@@ -162,6 +159,14 @@ export default function PropertyForm({
                         data={paranomaLink}
                       />
                     )}
+                    <h1 className="text-xl font-bold flex">
+                      Upload 3D Model
+                      <Md360 size={25} className="ml-2" />
+                    </h1>
+                    <p className="text-sm text-gray-500">
+                      Upload 3D model in GLB format
+                    </p>
+                    <Upload3dModel />
                   </form>
                 </div>
               </ModalBody>
