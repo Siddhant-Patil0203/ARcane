@@ -33,10 +33,12 @@ import {
   useContract,
   useContractRead,
 } from "@thirdweb-dev/react";
+<link
+  href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
+  rel="stylesheet"
+/>;
 
 export default function NavBar() {
-  const MapboxAPIKey =
-    "pk.eyJ1IjoiZGV2LXZpc2hhbCIsImEiOiJjbG52ejNqZWEwM2xyMmpvNjhneDNybjB5In0.vxw4utUDHbwyqJHgMr0Q4g";
   const { theme, setTheme } = useTheme();
   const navigateTo = useNavigate();
   const { user, setUser } = useGlobalContext();
@@ -73,9 +75,11 @@ export default function NavBar() {
   };
   function success(pos) {
     var crd = pos.coords;
-    // console.log("Your current position is:");
-    // console.log(`Latitude : ${crd.latitude}`);
-    // console.log(`Longitude: ${crd.longitude}`);
+    console.log("Your current position is:");
+    console.log(`Latitude : ${crd.latitude}`);
+    latitude = crd.latitude;
+    longitude = crd.longitude;
+    console.log("Longitude:" + longitude);
   }
 
   function errors(err) {
@@ -104,35 +108,29 @@ export default function NavBar() {
       console.log("Geolocation is not supported by this browser.");
     }
 
-    // axios
-    //   .get(
-    //     `https://api.mapbox.com/geocoding/v5/mapbox.places/-73.989,40.733.json?access_token=pk.eyJ1Ijoic2lkZDAyMDMiLCJhIjoiY2xudnoxejQ2MDRtZjJqbnc3ejY3dWZ6bSJ9.sMTwpGbl-wpTEJRCAe6Qeg`,
-    //   )
-    //   .then((response) => {
-    //     console.log("vishal bhauuuuu");
-    //     const data = response.data;
-    //     let cityFound = false;
-    //     // console.log(data);
+    axios
+      .get()
+      .then((response) => {
+        const data = response.data;
+        let cityFound = false;
+        console.log(data);
 
-    //     for (const feature of data.features) {
-    //       console.log("vishal bhauuuuu");
-    //       if (feature.place_type.includes("city") && feature.text) {
-    //         setCityName(feature.text);
-    //         cityFound = true;
-    //         console.log(cityName);
-    //         break;
-    //       }
-    //     }
-
-    //     if (!cityFound) {
-    //       setCityName("City not found");
-    //     } else {
-    //       console.log("cityName");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching data from Mapbox API:", error);
-    //   });
+        for (const feature of data.features) {
+          if (feature.text) {
+            setCityName(feature.text);
+            cityFound = true;
+            console.log("hello" + cityName);
+            break;
+          }
+        }
+        if (!cityFound) {
+          setCityName("City not found");
+        } else {
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data from Mapbox API:", error);
+      });
   }, []);
   return (
     <Navbar
@@ -251,6 +249,10 @@ export default function NavBar() {
           labelPlacement="outside"
           variant="bordered"
           color="success"
+          labelPlacement="outside"
+          variant="bordered"
+          color="success"
+          // value={cityName}
           startContent={
             <img
               className="w-4"
