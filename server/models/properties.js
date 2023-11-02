@@ -50,4 +50,4 @@ const propertySchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.model("Properties",propertySchema);
+export default mongoose.model("Properties", propertySchema);

@@ -206,12 +206,12 @@ const Home = () => {
                         </div>
 
                         <Link to="/details" state={{ item }}>
-                          <Button
+                          {/* <Button
                             radius="full"
                             className="bg-gradient-to-tr mt-3 from-[#1E152D] to-[#7D5CB2] text-white shadow-lg w-full"
-                          >
+                          > */}
                             View Details
-                          </Button>
+                          {/* </Button> */}
                         </Link>
                       </div>
                     </div>
@@ -286,12 +286,12 @@ const Home = () => {
                         </div>
 
                         <Link to="/details" state={{ item }}>
-                          <Button
+                          {/* <Button
                             radius="full"
                             className="bg-gradient-to-tr mt-3 from-[#1E152D] to-[#7D5CB2] text-white shadow-lg w-full"
-                          >
+                          > */}
                             View Details
-                          </Button>
+                          {/* </Button> */}
                         </Link>
                       </div>
                     </div>
@@ -367,12 +367,12 @@ const Home = () => {
                       </div>
 
                       <Link to="/details" state={{ item }}>
-                        <Button
+                        {/* <Button
                           radius="full"
                           className="bg-gradient-to-tr mt-3 from-[#1E152D] to-[#7D5CB2] text-white shadow-lg w-full"
-                        >
+                        > */}
                           View Details
-                        </Button>
+                        {/* </Button> */}
                       </Link>
                     </div>
                   </div>
