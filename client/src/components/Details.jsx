@@ -58,14 +58,14 @@ const Details = () => {
               {...slideAnimation("down")}
               className="ml-5 lg:ml-14"
             >
-              <p className="font-bold text-3xl">Property Name:</p>
-              <div className="mt-2 mb-5 font-bold text-3xl">
+              <p className="text-3xl font-bold">Property Name:</p>
+              <div className="mt-2 mb-5 text-3xl font-bold">
                 {propData?.item?.title}
               </div>
             </motion.header>
             <motion.div
               {...headContainerAnimation}
-              className="ml-5 lg:ml-14 mr-5 lg:mr-0"
+              className="ml-5 mr-5 lg:ml-14 lg:mr-0"
             >
               <motion.div {...headTextAnimation}>
                 <h1 className="mt-2 text-2xl font-bold">
@@ -77,12 +77,22 @@ const Details = () => {
                 onClick={() => {
                   state.intro = false;
                 }}
-                className="flex mt-2 w-full lg:w-fit lg:ml-0 lg:mt-2"
+                className="flex w-full mt-2 lg:w-fit lg:ml-0 lg:mt-2"
                 color="secondary"
                 variant="shadow"
               >
                 Lets Go
               </Button>
+              <Link to="/360View" state={{ item: propData }}>
+                {/* <Button
+                  className="flex w-full mt-2 lg:w-fit lg:ml-0 lg:mt-2"
+                  color="secondary"
+                  variant="shadow"
+                > */}
+                <div className="p-3 m-2 text-center bg-secondary rounded-xl w-fit">360View</div>
+                  {/* 360View */}
+                {/* </Button> */}
+              </Link>
 
               <Card className="lg:w-[50%] mt-5 bg-opacity-40">
                 <CardBody>
@@ -96,17 +106,17 @@ const Details = () => {
                     width="10%"
                   />
                   <Chip
-                    className="lg:text-xl p-4 text-xsm  "
+                    className="p-4 lg:text-xl text-xsm "
                     color={
                       propData?.item?.status == "Listed" ? "success" : "primary"
                     }
                   >
                     Current Status :- {propData?.item?.status}
                   </Chip>
-                  <p className="font-bold text-xl mt-5">Description</p>
+                  <p className="mt-5 text-xl font-bold">Description</p>
                   <div>{propData?.item?.description}</div>
-                  <p className="font-bold text-xl mt-5">Price</p>
-                  <p className="font-extrabold text-3xl mt-2">$1 LAC</p>
+                  <p className="mt-5 text-xl font-bold">Price</p>
+                  <p className="mt-2 text-3xl font-extrabold">$1 LAC</p>
                 </CardBody>
               </Card>
 

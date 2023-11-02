@@ -13,6 +13,7 @@ import profileRoutes from "./routes/profile.js";
 import propertiesRoutes from "./routes/properties.js";
 import favouritesRoutes from "./routes/favourites.js";
 import reviewsRouter from "./routes/reviews.js";
+import imageSticherRouter from "./models/imageSticher.js";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/profile", profileRoutes);
 app.use("/api/v1/properties", propertiesRoutes);
 app.use("/api/v1/fav", favouritesRoutes);
 app.use("/api/v1/reviews", reviewsRouter);
+app.use("/api/v1/imgstich", imageSticherRouter);
 
 const CONNECTION_URL = process.env.MONGO_URL;
 const PORT = process.env.PORT || 5000;

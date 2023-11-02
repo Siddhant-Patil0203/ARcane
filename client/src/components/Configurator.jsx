@@ -138,7 +138,7 @@ const Configurator = () => {
                   color="warning"
                   variant="shadow"
                   isLoading={isLoading}
-                  disabled
+                  // disabled
                 >
                   {isLoading ? 'Generating Texture...' : 'Send'}
                 </Button>
