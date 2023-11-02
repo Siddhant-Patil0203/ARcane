@@ -1,5 +1,5 @@
 import express from "express";
-import {addLinks , getLinks} from "../controllers/ImageSticher.js";
+import {addLinks , getLinks} from "../controllers/imageSticher.js";
 const router = express.Router();
 
 router.get("/get/:id",getLinks);
