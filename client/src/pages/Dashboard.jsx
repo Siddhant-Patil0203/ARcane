@@ -46,7 +46,6 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState(initialForm);
   const [propertyList, setPropertyList] = useState();
-  const navigateTo = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -57,7 +56,6 @@ const Dashboard = () => {
     setIsLoading(true);
 
     try {
-      console.log(form);
       const res = await axios.post("/api/v1/properties/Add", form);
       const result = res.data;
       console.log(result);
@@ -73,7 +71,7 @@ const Dashboard = () => {
     setIsLoading(true);
 
     try {
-      // console.log(form);
+      console.log(form);
       const res = await axios.delete(`/api/v1/properties/delete/${id}`);
       const result = res.data;
       console.log(result);
@@ -104,10 +102,10 @@ const Dashboard = () => {
       try {
         const res = await axios.get("/api/v1/properties/fetch/user");
         setPropertyList(res.data);
-        console.log(res.data);
+        // console.log(res.data);
         // setIsLoading(false);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
         // setIsLoading(false);
       }
     };
@@ -142,6 +140,7 @@ const Dashboard = () => {
             </DropdownMenu>
           </Dropdown>
           <QrCode />
+          <Spacer y={2} />
           <PropertyForm
             form={form}
             handleChange={handleChange}
@@ -220,6 +219,8 @@ const Dashboard = () => {
                           </p>
                         </div>
                       </div>
+
+                      <Spacer x={1} />
                       <Button
                         color="danger"
                         radius="full"
@@ -234,10 +235,15 @@ const Dashboard = () => {
                       >
                         Delete Property
                       </Button>
-
-                      <Button color="primary" radius="full" size="sm">
-                        Update
-                      </Button>
+                      <Spacer x={1} />
+                      <PropertyForm
+                        form={form}
+                        handleChange={handleChange}
+                        handleSumbmit={handleSumbmit}
+                        isLoading={isLoading}
+                        text={"edit"}
+                        width="w-[40px]"
+                      />
                     </CardFooter>
                   </Card>
                 </div>
