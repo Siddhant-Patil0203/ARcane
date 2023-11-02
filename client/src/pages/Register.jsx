@@ -97,10 +97,10 @@ const Register = () => {
 
   return (
     <>
-      <div className="h-screen w-screen">
-        <div className="flex  flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="w-screen h-screen">
+        <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight dark:text-white">
+            <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-center dark:text-white">
               Sign in to your account
             </h2>
           </div>
@@ -229,7 +229,7 @@ const Register = () => {
             </form>
             <Button
               onClick={googleSignin}
-              className="flex mt-3 w-full"
+              className="flex w-full mt-3"
               color="primary"
               radius="sm"
               isLoading={isLoading}
@@ -237,7 +237,7 @@ const Register = () => {
             >
               Sign in with Google
             </Button>
-            <div className="mt-5 flex ">
+            <div className="flex mt-5 ">
               Already Registered ? {"  "}
               <Link to="/login" className="text-primary">
                 <center>&nbsp; Login</center>
