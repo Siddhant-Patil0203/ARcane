@@ -228,9 +228,9 @@ export default function NavBar() {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        <Input
+        <Button
           type="location"
-          placeholder="Get Your Location"
+         
           labelPlacement="outside"
           variant="bordered"
           color="success"
