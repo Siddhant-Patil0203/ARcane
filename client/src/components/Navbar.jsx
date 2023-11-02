@@ -249,9 +249,6 @@ export default function NavBar() {
           labelPlacement="outside"
           variant="bordered"
           color="success"
-          labelPlacement="outside"
-          variant="bordered"
-          color="success"
           // value={cityName}
           startContent={
             <img
