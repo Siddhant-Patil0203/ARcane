@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bytescale/sdk": "^3.9.0",
     "@bytescale/upload-widget-react": "^4.11.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",

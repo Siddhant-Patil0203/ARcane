@@ -15,11 +15,11 @@ const options = {
   },
 };
 
-const UploadBottonComp = ({ handelChange }) => (
+const Upload3dModel = ({ handelChange }) => (
   <UploadDropzone
     options={options}
     onUpdate={({ uploadedFiles }) => {
-      console.log(uploadedFiles.map((x) => x.fileUrl).join("\n"));
+      handelChange(uploadedFiles.map((x) => x.fileUrl).join("\n"));
     }}
     onComplete={(files) => handelChange(files.map((x) => x.fileUrl).join("\n"))}
     width="600px"
@@ -27,4 +27,4 @@ const UploadBottonComp = ({ handelChange }) => (
   />
 );
 
-export default UploadBottonComp;
+export default Upload3dModel;
