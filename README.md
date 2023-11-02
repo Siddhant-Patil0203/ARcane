@@ -46,6 +46,7 @@
 
 
 ### 🌐 Domains  
+- **Updated Link** : https://arcane-store-v2.vercel.app/login
 - **Client Side** : https://arcane-delta.vercel.app/
 - **Server Side** : https://arcane-server.vercel.app/
 
